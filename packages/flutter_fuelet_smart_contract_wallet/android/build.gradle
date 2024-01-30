@@ -1,0 +1,40 @@
+// The Android Gradle Plugin builds the native code with the Android NDK.
+
+group 'app.fuelet.flutter_fuelet_smart_contract_wallet'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        // The Android Gradle Plugin knows how to build native code with the NDK.
+        classpath 'com.android.tools.build:gradle:7.3.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+
+    // Trigger the binary download/update over in CMakeLists.txt
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}

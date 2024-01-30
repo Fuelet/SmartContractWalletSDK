@@ -1,0 +1,13 @@
+[package]
+name = "fuelet_smart_contract_wallet"
+version = "0.0.0"
+edition = "2018"
+
+[lib]
+crate-type = ["staticlib", "cdylib"]
+
+[build-dependencies]
+flutter_rust_bridge_codegen = "1.82.6"
+
+[dependencies]
+flutter_rust_bridge = "1.82.6"

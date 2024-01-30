@@ -1,0 +1,2 @@
+[workspace]
+members = ["packages/fuelet_smart_contract_wallet/native"]
