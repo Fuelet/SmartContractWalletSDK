@@ -24,6 +24,16 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
   }
 
   @protected
+  Object api2wire_u64(int raw) {
+    return castNativeBigInt(raw);
+  }
+
+  @protected
+  Uint8List api2wire_u8_array_32(U8Array32 raw) {
+    return Uint8List.fromList(raw);
+  }
+
+  @protected
   Uint8List api2wire_uint_8_list(Uint8List raw) {
     return raw;
   }
@@ -43,6 +53,12 @@ class FueletSmartContractWalletWasmModule implements WasmModule {
   external dynamic /* void */ wire_deploy_contract(NativePortType port_, String private_key, String node_url);
 
   external dynamic /* void */ wire_get_script(NativePortType port_, String private_key, String node_url, String contract_id_str);
+
+  external dynamic /* void */ wire_get_predicate_address(NativePortType port_, String wallet_public_key, Uint8List script_hash);
+
+  external dynamic /* void */ wire_gen_transfer_tx_request(NativePortType port_, String node_url, String wallet_public_key, Uint8List script_hash, String to, Object amount, String asset);
+
+  external dynamic /* void */ wire_send_tx(NativePortType port_, String node_url, Uint8List encoded_tx, Uint8List signature);
 }
 
 // Section: WASM wire connector
@@ -53,4 +69,10 @@ class FueletSmartContractWalletWire extends FlutterRustBridgeWasmWireBase<Fuelet
   void wire_deploy_contract(NativePortType port_, String private_key, String node_url) => wasmModule.wire_deploy_contract(port_, private_key, node_url);
 
   void wire_get_script(NativePortType port_, String private_key, String node_url, String contract_id_str) => wasmModule.wire_get_script(port_, private_key, node_url, contract_id_str);
+
+  void wire_get_predicate_address(NativePortType port_, String wallet_public_key, Uint8List script_hash) => wasmModule.wire_get_predicate_address(port_, wallet_public_key, script_hash);
+
+  void wire_gen_transfer_tx_request(NativePortType port_, String node_url, String wallet_public_key, Uint8List script_hash, String to, Object amount, String asset) => wasmModule.wire_gen_transfer_tx_request(port_, node_url, wallet_public_key, script_hash, to, amount, asset);
+
+  void wire_send_tx(NativePortType port_, String node_url, Uint8List encoded_tx, Uint8List signature) => wasmModule.wire_send_tx(port_, node_url, encoded_tx, signature);
 }

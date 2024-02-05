@@ -3,3 +3,4 @@ mod api;
 mod model;
 mod consts;
 mod util;
+mod error;

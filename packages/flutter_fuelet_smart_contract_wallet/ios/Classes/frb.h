@@ -35,6 +35,23 @@ void wire_get_script(int64_t port_,
                      struct wire_uint_8_list *node_url,
                      struct wire_uint_8_list *contract_id_str);
 
+void wire_get_predicate_address(int64_t port_,
+                                struct wire_uint_8_list *wallet_public_key,
+                                struct wire_uint_8_list *script_hash);
+
+void wire_gen_transfer_tx_request(int64_t port_,
+                                  struct wire_uint_8_list *node_url,
+                                  struct wire_uint_8_list *wallet_public_key,
+                                  struct wire_uint_8_list *script_hash,
+                                  struct wire_uint_8_list *to,
+                                  uint64_t amount,
+                                  struct wire_uint_8_list *asset);
+
+void wire_send_tx(int64_t port_,
+                  struct wire_uint_8_list *node_url,
+                  struct wire_uint_8_list *encoded_tx,
+                  struct wire_uint_8_list *signature);
+
 struct wire_uint_8_list *new_uint_8_list_0(int32_t len);
 
 void free_WireSyncReturn(WireSyncReturn ptr);
@@ -43,6 +60,9 @@ static int64_t dummy_method_to_enforce_bundling(void) {
     int64_t dummy_var = 0;
     dummy_var ^= ((int64_t) (void*) wire_deploy_contract);
     dummy_var ^= ((int64_t) (void*) wire_get_script);
+    dummy_var ^= ((int64_t) (void*) wire_get_predicate_address);
+    dummy_var ^= ((int64_t) (void*) wire_gen_transfer_tx_request);
+    dummy_var ^= ((int64_t) (void*) wire_send_tx);
     dummy_var ^= ((int64_t) (void*) new_uint_8_list_0);
     dummy_var ^= ((int64_t) (void*) free_WireSyncReturn);
     dummy_var ^= ((int64_t) (void*) store_dart_post_cobject);

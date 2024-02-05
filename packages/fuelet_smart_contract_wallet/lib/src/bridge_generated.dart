@@ -25,6 +25,22 @@ abstract class FueletSmartContractWallet {
   Future<U8Array32> getScript({required String privateKey, required String nodeUrl, required String contractIdStr, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kGetScriptConstMeta;
+
+  Future<String> getPredicateAddress({required String walletPublicKey, required U8Array32 scriptHash, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kGetPredicateAddressConstMeta;
+
+  Future<
+      (
+        Uint8List,
+        Uint8List
+      )> genTransferTxRequest({required String nodeUrl, required String walletPublicKey, required U8Array32 scriptHash, required String to, required int amount, required String asset, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kGenTransferTxRequestConstMeta;
+
+  Future<String> sendTx({required String nodeUrl, required Uint8List encodedTx, required Uint8List signature, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kSendTxConstMeta;
 }
 
 class U8Array32 extends NonGrowableListView<int> {
@@ -94,6 +110,97 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
         ],
       );
 
+  Future<String> getPredicateAddress({required String walletPublicKey, required U8Array32 scriptHash, dynamic hint}) {
+    var arg0 = _platform.api2wire_String(walletPublicKey);
+    var arg1 = _platform.api2wire_u8_array_32(scriptHash);
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_get_predicate_address(port_, arg0, arg1),
+      parseSuccessData: _wire2api_String,
+      parseErrorData: null,
+      constMeta: kGetPredicateAddressConstMeta,
+      argValues: [
+        walletPublicKey,
+        scriptHash
+      ],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kGetPredicateAddressConstMeta => const FlutterRustBridgeTaskConstMeta(
+        debugName: "get_predicate_address",
+        argNames: [
+          "walletPublicKey",
+          "scriptHash"
+        ],
+      );
+
+  Future<
+      (
+        Uint8List,
+        Uint8List
+      )> genTransferTxRequest({required String nodeUrl, required String walletPublicKey, required U8Array32 scriptHash, required String to, required int amount, required String asset, dynamic hint}) {
+    var arg0 = _platform.api2wire_String(nodeUrl);
+    var arg1 = _platform.api2wire_String(walletPublicKey);
+    var arg2 = _platform.api2wire_u8_array_32(scriptHash);
+    var arg3 = _platform.api2wire_String(to);
+    var arg4 = _platform.api2wire_u64(amount);
+    var arg5 = _platform.api2wire_String(asset);
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_gen_transfer_tx_request(port_, arg0, arg1, arg2, arg3, arg4, arg5),
+      parseSuccessData: _wire2api___record__uint_8_list_uint_8_list,
+      parseErrorData: null,
+      constMeta: kGenTransferTxRequestConstMeta,
+      argValues: [
+        nodeUrl,
+        walletPublicKey,
+        scriptHash,
+        to,
+        amount,
+        asset
+      ],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kGenTransferTxRequestConstMeta => const FlutterRustBridgeTaskConstMeta(
+        debugName: "gen_transfer_tx_request",
+        argNames: [
+          "nodeUrl",
+          "walletPublicKey",
+          "scriptHash",
+          "to",
+          "amount",
+          "asset"
+        ],
+      );
+
+  Future<String> sendTx({required String nodeUrl, required Uint8List encodedTx, required Uint8List signature, dynamic hint}) {
+    var arg0 = _platform.api2wire_String(nodeUrl);
+    var arg1 = _platform.api2wire_uint_8_list(encodedTx);
+    var arg2 = _platform.api2wire_uint_8_list(signature);
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_send_tx(port_, arg0, arg1, arg2),
+      parseSuccessData: _wire2api_String,
+      parseErrorData: null,
+      constMeta: kSendTxConstMeta,
+      argValues: [
+        nodeUrl,
+        encodedTx,
+        signature
+      ],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kSendTxConstMeta => const FlutterRustBridgeTaskConstMeta(
+        debugName: "send_tx",
+        argNames: [
+          "nodeUrl",
+          "encodedTx",
+          "signature"
+        ],
+      );
+
   void dispose() {
     _platform.dispose();
   }
@@ -101,6 +208,20 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
 
   String _wire2api_String(dynamic raw) {
     return raw as String;
+  }
+
+  (
+    Uint8List,
+    Uint8List
+  ) _wire2api___record__uint_8_list_uint_8_list(dynamic raw) {
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (
+      _wire2api_uint_8_list(arr[0]),
+      _wire2api_uint_8_list(arr[1]),
+    );
   }
 
   int _wire2api_u8(dynamic raw) {

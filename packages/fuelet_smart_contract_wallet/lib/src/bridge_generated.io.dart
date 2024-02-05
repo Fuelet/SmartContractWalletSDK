@@ -22,6 +22,18 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
   }
 
   @protected
+  int api2wire_u64(int raw) {
+    return raw;
+  }
+
+  @protected
+  ffi.Pointer<wire_uint_8_list> api2wire_u8_array_32(U8Array32 raw) {
+    final ans = inner.new_uint_8_list_0(32);
+    ans.ref.ptr.asTypedList(32).setAll(0, raw);
+    return ans;
+  }
+
+  @protected
   ffi.Pointer<wire_uint_8_list> api2wire_uint_8_list(Uint8List raw) {
     final ans = inner.new_uint_8_list_0(raw.length);
     ans.ref.ptr.asTypedList(raw.length).setAll(0, raw);
@@ -139,6 +151,61 @@ class FueletSmartContractWalletWire implements FlutterRustBridgeWireBase {
 
   late final _wire_get_scriptPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_get_script');
   late final _wire_get_script = _wire_get_scriptPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
+
+  void wire_get_predicate_address(
+    int port_,
+    ffi.Pointer<wire_uint_8_list> wallet_public_key,
+    ffi.Pointer<wire_uint_8_list> script_hash,
+  ) {
+    return _wire_get_predicate_address(
+      port_,
+      wallet_public_key,
+      script_hash,
+    );
+  }
+
+  late final _wire_get_predicate_addressPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_get_predicate_address');
+  late final _wire_get_predicate_address = _wire_get_predicate_addressPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
+
+  void wire_gen_transfer_tx_request(
+    int port_,
+    ffi.Pointer<wire_uint_8_list> node_url,
+    ffi.Pointer<wire_uint_8_list> wallet_public_key,
+    ffi.Pointer<wire_uint_8_list> script_hash,
+    ffi.Pointer<wire_uint_8_list> to,
+    int amount,
+    ffi.Pointer<wire_uint_8_list> asset,
+  ) {
+    return _wire_gen_transfer_tx_request(
+      port_,
+      node_url,
+      wallet_public_key,
+      script_hash,
+      to,
+      amount,
+      asset,
+    );
+  }
+
+  late final _wire_gen_transfer_tx_requestPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Uint64, ffi.Pointer<wire_uint_8_list>)>>('wire_gen_transfer_tx_request');
+  late final _wire_gen_transfer_tx_request = _wire_gen_transfer_tx_requestPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, int, ffi.Pointer<wire_uint_8_list>)>();
+
+  void wire_send_tx(
+    int port_,
+    ffi.Pointer<wire_uint_8_list> node_url,
+    ffi.Pointer<wire_uint_8_list> encoded_tx,
+    ffi.Pointer<wire_uint_8_list> signature,
+  ) {
+    return _wire_send_tx(
+      port_,
+      node_url,
+      encoded_tx,
+      signature,
+    );
+  }
+
+  late final _wire_send_txPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_send_tx');
+  late final _wire_send_tx = _wire_send_txPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
 
   ffi.Pointer<wire_uint_8_list> new_uint_8_list_0(
     int len,
