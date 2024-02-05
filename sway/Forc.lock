@@ -1,0 +1,58 @@
+[[package]]
+name = "core"
+source = "path+from-root-ABECC2A945C8A2C7"
+
+[[package]]
+name = "core"
+source = "path+from-root-C9A85C38FB08D9AC"
+
+[[package]]
+name = "ownership"
+source = "git+https://github.com/FuelLabs/sway-libs?tag=v0.18.0#8d196e9379463d4596ac582a20a84ed52ff58c69"
+dependencies = [
+    "src_5",
+    "std git+https://github.com/fuellabs/sway?rev#d4c12dd813edb9a8da07c57ee0ff3a043329e7e9",
+]
+
+[[package]]
+name = "recovery_checker"
+source = "member"
+dependencies = [
+    "ownership",
+    "shared",
+    "src_5",
+    "std git+https://github.com/fuellabs/sway?tag=v0.49.0#a17fbf3e7d8dc9845458260c343b4d8f006f3633",
+]
+
+[[package]]
+name = "secure_enclave_predicate"
+source = "member"
+dependencies = ["std git+https://github.com/fuellabs/sway?tag=v0.49.0#a17fbf3e7d8dc9845458260c343b4d8f006f3633"]
+
+[[package]]
+name = "shared"
+source = "member"
+dependencies = ["std git+https://github.com/fuellabs/sway?tag=v0.49.0#a17fbf3e7d8dc9845458260c343b4d8f006f3633"]
+
+[[package]]
+name = "src_5"
+source = "git+https://github.com/FuelLabs/sway-standards?tag=v0.2.2#6989cf8224b0d8aabea62f3d3c648fc754948705"
+dependencies = ["std git+https://github.com/fuellabs/sway?rev#d4c12dd813edb9a8da07c57ee0ff3a043329e7e9"]
+
+[[package]]
+name = "std"
+source = "git+https://github.com/fuellabs/sway?rev#d4c12dd813edb9a8da07c57ee0ff3a043329e7e9"
+dependencies = ["core path+from-root-ABECC2A945C8A2C7"]
+
+[[package]]
+name = "std"
+source = "git+https://github.com/fuellabs/sway?tag=v0.49.0#a17fbf3e7d8dc9845458260c343b4d8f006f3633"
+dependencies = ["core path+from-root-C9A85C38FB08D9AC"]
+
+[[package]]
+name = "withdrawal_script"
+source = "member"
+dependencies = [
+    "shared",
+    "std git+https://github.com/fuellabs/sway?tag=v0.49.0#a17fbf3e7d8dc9845458260c343b4d8f006f3633",
+]

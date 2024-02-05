@@ -1,0 +1,228 @@
+{
+  "types": [
+    {
+      "typeId": 0,
+      "type": "()",
+      "components": [],
+      "typeParameters": null
+    },
+    {
+      "typeId": 1,
+      "type": "b256",
+      "components": null,
+      "typeParameters": null
+    },
+    {
+      "typeId": 2,
+      "type": "enum AccessError",
+      "components": [
+        {
+          "name": "NotOwner",
+          "type": 0,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 3,
+      "type": "enum Identity",
+      "components": [
+        {
+          "name": "Address",
+          "type": 6,
+          "typeArguments": null
+        },
+        {
+          "name": "ContractId",
+          "type": 7,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 4,
+      "type": "enum InitializationError",
+      "components": [
+        {
+          "name": "CannotReinitialized",
+          "type": 0,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 5,
+      "type": "enum RecoveryCheckerError",
+      "components": [
+        {
+          "name": "NotRecovered",
+          "type": 0,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 6,
+      "type": "struct Address",
+      "components": [
+        {
+          "name": "value",
+          "type": 1,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 7,
+      "type": "struct ContractId",
+      "components": [
+        {
+          "name": "value",
+          "type": 1,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 8,
+      "type": "struct OwnershipSet",
+      "components": [
+        {
+          "name": "new_owner",
+          "type": 3,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    }
+  ],
+  "functions": [
+    {
+      "inputs": [],
+      "name": "check_cooldown_passed",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "read"
+          ]
+        }
+      ]
+    },
+    {
+      "inputs": [],
+      "name": "init",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "read",
+            "write"
+          ]
+        }
+      ]
+    },
+    {
+      "inputs": [],
+      "name": "start_recovery",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "write"
+          ]
+        }
+      ]
+    },
+    {
+      "inputs": [],
+      "name": "stop_recovery",
+      "output": {
+        "name": "",
+        "type": 0,
+        "typeArguments": null
+      },
+      "attributes": [
+        {
+          "name": "storage",
+          "arguments": [
+            "write"
+          ]
+        }
+      ]
+    }
+  ],
+  "loggedTypes": [
+    {
+      "logId": 0,
+      "loggedType": {
+        "name": "",
+        "type": 2,
+        "typeArguments": []
+      }
+    },
+    {
+      "logId": 1,
+      "loggedType": {
+        "name": "",
+        "type": 5,
+        "typeArguments": []
+      }
+    },
+    {
+      "logId": 2,
+      "loggedType": {
+        "name": "",
+        "type": 4,
+        "typeArguments": []
+      }
+    },
+    {
+      "logId": 3,
+      "loggedType": {
+        "name": "",
+        "type": 8,
+        "typeArguments": []
+      }
+    },
+    {
+      "logId": 4,
+      "loggedType": {
+        "name": "",
+        "type": 2,
+        "typeArguments": []
+      }
+    },
+    {
+      "logId": 5,
+      "loggedType": {
+        "name": "",
+        "type": 2,
+        "typeArguments": []
+      }
+    }
+  ],
+  "messagesTypes": [],
+  "configurables": []
+}

@@ -1,0 +1,10 @@
+[workspace]
+members = [
+  "./recovery_checker",
+  "./secure_enclave_predicate",
+  "./withdrawal_script",
+  "./shared",
+]
+
+[patch.'https://github.com/fuellabs/sway']
+std = { git = "https://github.com/fuellabs/sway", tag = "v0.49.0" }
