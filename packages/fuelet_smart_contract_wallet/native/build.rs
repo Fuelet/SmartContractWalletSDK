@@ -10,7 +10,7 @@ const MACOS_C_OUTPUT_DIR: &str = "../../flutter_fuelet_smart_contract_wallet/mac
 
 fn main() {
     // Tell Cargo that if the input Rust code changes, rerun this build script
-    println!("cargo:rerun-if-changed={}", RUST_INPUT);
+    // println!("cargo:rerun-if-changed={}", RUST_INPUT);
 
     // Options for frb_codegen
     let raw_opts = RawOpts {
