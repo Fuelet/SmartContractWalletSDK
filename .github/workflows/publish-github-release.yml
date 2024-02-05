@@ -1,0 +1,73 @@
+name: Publish Github release
+
+on: workflow_call
+
+jobs:
+  build_apple:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - uses: ./.github/actions/initialize
+
+      - uses: ./.github/actions/extract_package_version
+
+      - name: Build apple binary
+        run: melos run build:apple
+
+      - name: Uploading artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: apple_binary
+          path: platform-build/FueletSmartContractWallet.xcframework.zip
+
+  build_android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - uses: ./.github/actions/initialize
+
+      - uses: ./.github/actions/extract_package_version
+
+      - name: Setup NDK
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r25b
+
+      - name: Build android binary
+        run: melos run build:android
+
+      - name: Uploading artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: android_binary
+          path: platform-build/android.tar.gz
+
+  publish_github_release:
+    runs-on: ubuntu-latest
+    needs: [ build_apple, build_android ]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download apple binary
+        uses: actions/download-artifact@v3
+        with:
+          name: apple_binary
+          path: platform-build
+
+      - name: Download android binary
+        uses: actions/download-artifact@v3
+        with:
+          name: android_binary
+          path: platform-build
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{env.RELEASE_VERSION}}
+          files: platform-build/*

@@ -24,7 +24,7 @@ scripts:
     description: Format a specific package in this project.
 
   build:
-    run: melos run build:apple && melos run build:android && melos run build:other
+    run: melos run build:apple && melos run build:android && melos run build:web # && melos run build:other
     description: Build all native libraries for the project.
 
   build:apple:
@@ -38,6 +38,10 @@ scripts:
   build:other:
     run: bash scripts/build-other.sh
     description: Build the .tar.gz for all other platforms.
+
+  build:web:
+    run: echo "Stub for building web"
+    description: Build web.
 
   test:
     run: melos run test:dart --no-select && melos run test:flutter --no-select

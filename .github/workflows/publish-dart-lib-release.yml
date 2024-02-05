@@ -1,0 +1,10 @@
+name: Publish dart package release
+
+on:
+  push:
+    tags:
+      - "fuelet_smart_contract_wallet-*"
+
+jobs:
+  publish_github_release:
+    uses: ./.github/workflows/publish-github-release.yml

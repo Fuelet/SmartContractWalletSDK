@@ -1,0 +1,10 @@
+name: Publish flutter package release
+
+on:
+  push:
+    tags:
+      - "flutter_fuelet_smart_contract_wallet-*"
+
+jobs:
+  publish_github_release:
+    uses: ./.github/workflows/publish-github-release.yml
