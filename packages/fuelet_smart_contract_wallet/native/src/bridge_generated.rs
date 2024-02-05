@@ -22,21 +22,47 @@ use std::sync::Arc;
 
 // Section: wire functions
 
-fn wire_plus_impl(
+fn wire_deploy_contract_impl(
     port_: MessagePort,
-    a: impl Wire2Api<u8> + UnwindSafe,
-    b: impl Wire2Api<u8> + UnwindSafe,
+    private_key: impl Wire2Api<String> + UnwindSafe,
+    node_url: impl Wire2Api<String> + UnwindSafe,
 ) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, u8, _>(
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, String, _>(
         WrapInfo {
-            debug_name: "plus",
+            debug_name: "deploy_contract",
             port: Some(port_),
             mode: FfiCallMode::Normal,
         },
         move || {
-            let api_a = a.wire2api();
-            let api_b = b.wire2api();
-            move |task_callback| Result::<_, ()>::Ok(plus(api_a, api_b))
+            let api_private_key = private_key.wire2api();
+            let api_node_url = node_url.wire2api();
+            move |task_callback| Result::<_, ()>::Ok(deploy_contract(api_private_key, api_node_url))
+        },
+    )
+}
+fn wire_get_script_impl(
+    port_: MessagePort,
+    private_key: impl Wire2Api<String> + UnwindSafe,
+    node_url: impl Wire2Api<String> + UnwindSafe,
+    contract_id_str: impl Wire2Api<String> + UnwindSafe,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, [u8; 32], _>(
+        WrapInfo {
+            debug_name: "get_script",
+            port: Some(port_),
+            mode: FfiCallMode::Normal,
+        },
+        move || {
+            let api_private_key = private_key.wire2api();
+            let api_node_url = node_url.wire2api();
+            let api_contract_id_str = contract_id_str.wire2api();
+            move |task_callback| {
+                Result::<_, ()>::Ok(get_script(
+                    api_private_key,
+                    api_node_url,
+                    api_contract_id_str,
+                ))
+            }
         },
     )
 }
@@ -62,11 +88,13 @@ where
         (!self.is_null()).then(|| self.wire2api())
     }
 }
+
 impl Wire2Api<u8> for u8 {
     fn wire2api(self) -> u8 {
         self
     }
 }
+
 // Section: impl IntoDart
 
 // Section: executor
@@ -82,8 +110,18 @@ mod web {
     // Section: wire functions
 
     #[wasm_bindgen]
-    pub fn wire_plus(port_: MessagePort, a: u8, b: u8) {
-        wire_plus_impl(port_, a, b)
+    pub fn wire_deploy_contract(port_: MessagePort, private_key: String, node_url: String) {
+        wire_deploy_contract_impl(port_, private_key, node_url)
+    }
+
+    #[wasm_bindgen]
+    pub fn wire_get_script(
+        port_: MessagePort,
+        private_key: String,
+        node_url: String,
+        contract_id_str: String,
+    ) {
+        wire_get_script_impl(port_, private_key, node_url, contract_id_str)
     }
 
     // Section: allocate functions
@@ -92,6 +130,17 @@ mod web {
 
     // Section: impl Wire2Api
 
+    impl Wire2Api<String> for String {
+        fn wire2api(self) -> String {
+            self
+        }
+    }
+
+    impl Wire2Api<Vec<u8>> for Box<[u8]> {
+        fn wire2api(self) -> Vec<u8> {
+            self.into_vec()
+        }
+    }
     // Section: impl Wire2Api for JsValue
 
     impl<T> Wire2Api<Option<T>> for JsValue
@@ -102,9 +151,19 @@ mod web {
             (!self.is_null() && !self.is_undefined()).then(|| self.wire2api())
         }
     }
+    impl Wire2Api<String> for JsValue {
+        fn wire2api(self) -> String {
+            self.as_string().expect("non-UTF-8 string, or not a string")
+        }
+    }
     impl Wire2Api<u8> for JsValue {
         fn wire2api(self) -> u8 {
             self.unchecked_into_f64() as _
+        }
+    }
+    impl Wire2Api<Vec<u8>> for JsValue {
+        fn wire2api(self) -> Vec<u8> {
+            self.unchecked_into::<js_sys::Uint8Array>().to_vec().into()
         }
     }
 }
@@ -117,17 +176,62 @@ mod io {
     // Section: wire functions
 
     #[no_mangle]
-    pub extern "C" fn wire_plus(port_: i64, a: u8, b: u8) {
-        wire_plus_impl(port_, a, b)
+    pub extern "C" fn wire_deploy_contract(
+        port_: i64,
+        private_key: *mut wire_uint_8_list,
+        node_url: *mut wire_uint_8_list,
+    ) {
+        wire_deploy_contract_impl(port_, private_key, node_url)
+    }
+
+    #[no_mangle]
+    pub extern "C" fn wire_get_script(
+        port_: i64,
+        private_key: *mut wire_uint_8_list,
+        node_url: *mut wire_uint_8_list,
+        contract_id_str: *mut wire_uint_8_list,
+    ) {
+        wire_get_script_impl(port_, private_key, node_url, contract_id_str)
     }
 
     // Section: allocate functions
+
+    #[no_mangle]
+    pub extern "C" fn new_uint_8_list_0(len: i32) -> *mut wire_uint_8_list {
+        let ans = wire_uint_8_list {
+            ptr: support::new_leak_vec_ptr(Default::default(), len),
+            len,
+        };
+        support::new_leak_box_ptr(ans)
+    }
 
     // Section: related functions
 
     // Section: impl Wire2Api
 
+    impl Wire2Api<String> for *mut wire_uint_8_list {
+        fn wire2api(self) -> String {
+            let vec: Vec<u8> = self.wire2api();
+            String::from_utf8_lossy(&vec).into_owned()
+        }
+    }
+
+    impl Wire2Api<Vec<u8>> for *mut wire_uint_8_list {
+        fn wire2api(self) -> Vec<u8> {
+            unsafe {
+                let wrap = support::box_from_leak_ptr(self);
+                support::vec_from_leak_ptr(wrap.ptr, wrap.len)
+            }
+        }
+    }
     // Section: wire structs
+
+    #[repr(C)]
+    #[derive(Clone)]
+    pub struct wire_uint_8_list {
+        ptr: *mut u8,
+        len: i32,
+    }
 
     // Section: impl NewWithNullPtr
 

@@ -16,6 +16,17 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
 
 // Section: api2wire
 
+  @protected
+  ffi.Pointer<wire_uint_8_list> api2wire_String(String raw) {
+    return api2wire_uint_8_list(utf8.encoder.convert(raw));
+  }
+
+  @protected
+  ffi.Pointer<wire_uint_8_list> api2wire_uint_8_list(Uint8List raw) {
+    final ans = inner.new_uint_8_list_0(raw.length);
+    ans.ref.ptr.asTypedList(raw.length).setAll(0, raw);
+    return ans;
+  }
 // Section: finalizer
 
 // Section: api_fill_to_wire
@@ -97,20 +108,48 @@ class FueletSmartContractWalletWire implements FlutterRustBridgeWireBase {
   late final _init_frb_dart_api_dlPtr = _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<ffi.Void>)>>('init_frb_dart_api_dl');
   late final _init_frb_dart_api_dl = _init_frb_dart_api_dlPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
 
-  void wire_plus(
+  void wire_deploy_contract(
     int port_,
-    int a,
-    int b,
+    ffi.Pointer<wire_uint_8_list> private_key,
+    ffi.Pointer<wire_uint_8_list> node_url,
   ) {
-    return _wire_plus(
+    return _wire_deploy_contract(
       port_,
-      a,
-      b,
+      private_key,
+      node_url,
     );
   }
 
-  late final _wire_plusPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Uint8, ffi.Uint8)>>('wire_plus');
-  late final _wire_plus = _wire_plusPtr.asFunction<void Function(int, int, int)>();
+  late final _wire_deploy_contractPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_deploy_contract');
+  late final _wire_deploy_contract = _wire_deploy_contractPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
+
+  void wire_get_script(
+    int port_,
+    ffi.Pointer<wire_uint_8_list> private_key,
+    ffi.Pointer<wire_uint_8_list> node_url,
+    ffi.Pointer<wire_uint_8_list> contract_id_str,
+  ) {
+    return _wire_get_script(
+      port_,
+      private_key,
+      node_url,
+      contract_id_str,
+    );
+  }
+
+  late final _wire_get_scriptPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_get_script');
+  late final _wire_get_script = _wire_get_scriptPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
+
+  ffi.Pointer<wire_uint_8_list> new_uint_8_list_0(
+    int len,
+  ) {
+    return _new_uint_8_list_0(
+      len,
+    );
+  }
+
+  late final _new_uint_8_list_0Ptr = _lookup<ffi.NativeFunction<ffi.Pointer<wire_uint_8_list> Function(ffi.Int32)>>('new_uint_8_list_0');
+  late final _new_uint_8_list_0 = _new_uint_8_list_0Ptr.asFunction<ffi.Pointer<wire_uint_8_list> Function(int)>();
 
   void free_WireSyncReturn(
     WireSyncReturn ptr,
@@ -125,6 +164,13 @@ class FueletSmartContractWalletWire implements FlutterRustBridgeWireBase {
 }
 
 final class _Dart_Handle extends ffi.Opaque {}
+
+final class wire_uint_8_list extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> ptr;
+
+  @ffi.Int32()
+  external int len;
+}
 
 typedef DartPostCObjectFnType = ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(DartPort port_id, ffi.Pointer<ffi.Void> message)>>;
 typedef DartPort = ffi.Int64;

@@ -18,6 +18,15 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
 
 // Section: api2wire
 
+  @protected
+  String api2wire_String(String raw) {
+    return raw;
+  }
+
+  @protected
+  Uint8List api2wire_uint_8_list(Uint8List raw) {
+    return raw;
+  }
 // Section: finalizer
 }
 
@@ -31,7 +40,9 @@ external FueletSmartContractWalletWasmModule get wasmModule;
 class FueletSmartContractWalletWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
   external FueletSmartContractWalletWasmModule bind(dynamic thisArg, String moduleName);
-  external dynamic /* void */ wire_plus(NativePortType port_, int a, int b);
+  external dynamic /* void */ wire_deploy_contract(NativePortType port_, String private_key, String node_url);
+
+  external dynamic /* void */ wire_get_script(NativePortType port_, String private_key, String node_url, String contract_id_str);
 }
 
 // Section: WASM wire connector
@@ -39,5 +50,7 @@ class FueletSmartContractWalletWasmModule implements WasmModule {
 class FueletSmartContractWalletWire extends FlutterRustBridgeWasmWireBase<FueletSmartContractWalletWasmModule> {
   FueletSmartContractWalletWire(FutureOr<WasmModule> module) : super(WasmModule.cast<FueletSmartContractWalletWasmModule>(module));
 
-  void wire_plus(NativePortType port_, int a, int b) => wasmModule.wire_plus(port_, a, b);
+  void wire_deploy_contract(NativePortType port_, String private_key, String node_url) => wasmModule.wire_deploy_contract(port_, private_key, node_url);
+
+  void wire_get_script(NativePortType port_, String private_key, String node_url, String contract_id_str) => wasmModule.wire_get_script(port_, private_key, node_url, contract_id_str);
 }

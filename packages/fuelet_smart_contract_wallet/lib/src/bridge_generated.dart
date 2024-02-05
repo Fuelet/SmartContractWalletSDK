@@ -8,6 +8,8 @@ import 'package:meta/meta.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'package:uuid/uuid.dart';
 
+import 'package:collection/collection.dart';
+
 import 'dart:convert';
 import 'dart:async';
 import 'package:meta/meta.dart';
@@ -16,9 +18,22 @@ import 'package:uuid/uuid.dart';
 import 'bridge_generated.io.dart' if (dart.library.html) 'bridge_generated.web.dart';
 
 abstract class FueletSmartContractWallet {
-  Future<int> plus({required int a, required int b, dynamic hint});
+  Future<String> deployContract({required String privateKey, required String nodeUrl, dynamic hint});
 
-  FlutterRustBridgeTaskConstMeta get kPlusConstMeta;
+  FlutterRustBridgeTaskConstMeta get kDeployContractConstMeta;
+
+  Future<U8Array32> getScript({required String privateKey, required String nodeUrl, required String contractIdStr, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kGetScriptConstMeta;
+}
+
+class U8Array32 extends NonGrowableListView<int> {
+  static const arraySize = 32;
+  U8Array32(Uint8List inner)
+      : assert(inner.length == arraySize),
+        super(inner);
+  U8Array32.unchecked(Uint8List inner) : super(inner);
+  U8Array32.init() : super(Uint8List(arraySize));
 }
 
 class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
@@ -28,27 +43,54 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
   /// Only valid on web/WASM platforms.
   factory FueletSmartContractWalletImpl.wasm(FutureOr<WasmModule> module) => FueletSmartContractWalletImpl(module as ExternalLibrary);
   FueletSmartContractWalletImpl.raw(this._platform);
-  Future<int> plus({required int a, required int b, dynamic hint}) {
-    var arg0 = api2wire_u8(a);
-    var arg1 = api2wire_u8(b);
+  Future<String> deployContract({required String privateKey, required String nodeUrl, dynamic hint}) {
+    var arg0 = _platform.api2wire_String(privateKey);
+    var arg1 = _platform.api2wire_String(nodeUrl);
     return _platform.executeNormal(FlutterRustBridgeTask(
-      callFfi: (port_) => _platform.inner.wire_plus(port_, arg0, arg1),
-      parseSuccessData: _wire2api_u8,
+      callFfi: (port_) => _platform.inner.wire_deploy_contract(port_, arg0, arg1),
+      parseSuccessData: _wire2api_String,
       parseErrorData: null,
-      constMeta: kPlusConstMeta,
+      constMeta: kDeployContractConstMeta,
       argValues: [
-        a,
-        b
+        privateKey,
+        nodeUrl
       ],
       hint: hint,
     ));
   }
 
-  FlutterRustBridgeTaskConstMeta get kPlusConstMeta => const FlutterRustBridgeTaskConstMeta(
-        debugName: "plus",
+  FlutterRustBridgeTaskConstMeta get kDeployContractConstMeta => const FlutterRustBridgeTaskConstMeta(
+        debugName: "deploy_contract",
         argNames: [
-          "a",
-          "b"
+          "privateKey",
+          "nodeUrl"
+        ],
+      );
+
+  Future<U8Array32> getScript({required String privateKey, required String nodeUrl, required String contractIdStr, dynamic hint}) {
+    var arg0 = _platform.api2wire_String(privateKey);
+    var arg1 = _platform.api2wire_String(nodeUrl);
+    var arg2 = _platform.api2wire_String(contractIdStr);
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_get_script(port_, arg0, arg1, arg2),
+      parseSuccessData: _wire2api_u8_array_32,
+      parseErrorData: null,
+      constMeta: kGetScriptConstMeta,
+      argValues: [
+        privateKey,
+        nodeUrl,
+        contractIdStr
+      ],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kGetScriptConstMeta => const FlutterRustBridgeTaskConstMeta(
+        debugName: "get_script",
+        argNames: [
+          "privateKey",
+          "nodeUrl",
+          "contractIdStr"
         ],
       );
 
@@ -57,8 +99,20 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
   }
 // Section: wire2api
 
+  String _wire2api_String(dynamic raw) {
+    return raw as String;
+  }
+
   int _wire2api_u8(dynamic raw) {
     return raw as int;
+  }
+
+  U8Array32 _wire2api_u8_array_32(dynamic raw) {
+    return U8Array32(_wire2api_uint_8_list(raw));
+  }
+
+  Uint8List _wire2api_uint_8_list(dynamic raw) {
+    return raw as Uint8List;
   }
 }
 
@@ -68,4 +122,5 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
 int api2wire_u8(int raw) {
   return raw;
 }
+
 // Section: finalizer
