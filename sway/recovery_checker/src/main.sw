@@ -1,23 +1,36 @@
 contract;
 
 use shared::RecoveryChecker;
-use ownership::{_owner, only_owner, initialize_ownership};
-use std::{auth::msg_sender, b512::B512, ecr::{ec_recover_address}, tx::{tx_id, tx_witnesses_count, tx_witness_data}};
-use src_5::{AccessError, State};
+use std::{constants::ZERO_B256, auth::msg_sender, b512::B512, ecr::{ec_recover_address}, tx::{tx_id, tx_witnesses_count, tx_witness_data}};
+
+configurable {
+    OWNER_PUBLIC_KEY: b256 = ZERO_B256,
+}
 
 pub enum RecoveryCheckerError {
     NotRecovered: (),
+}
+
+pub enum AccessError {
+    NotOwner: (),
 }
 
 storage {
 	recovered: bool = false,
 }
 
+fn only_owner() {
+    require(
+        Identity::Address(Address { value: OWNER_PUBLIC_KEY }) == msg_sender().unwrap(),
+        AccessError::NotOwner,
+    );
+}
+
 #[storage(read)]
 fn witness_matches_owner_signature(signature: B512, message: b256) -> bool {
     match ec_recover_address(signature, message) {
         Err(_) => false,
-        Ok(address) => _owner() == State::Initialized(Identity::Address(address)),
+        Ok(address) => OWNER_PUBLIC_KEY == address.value,
     }
 }
 
@@ -47,12 +60,6 @@ fn check_owner_signature() {
 }
 
 impl RecoveryChecker for Contract {
-    #[storage(read, write)]
-    fn init() {
-      let sender = msg_sender().unwrap();
-      initialize_ownership(sender);
-    }
-
     #[storage(read)]
     fn check_cooldown_passed() {
         // msg_sender checks inputs to determine the sender. We need to derive sender from his signature

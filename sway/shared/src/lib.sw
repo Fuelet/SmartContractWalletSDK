@@ -1,9 +1,6 @@
 library;
 
 abi RecoveryChecker {
-    #[storage(read, write)]
-    fn init();
-
     #[storage(read)]
     fn check_cooldown_passed();
 

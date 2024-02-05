@@ -6,5 +6,3 @@ name = "recovery_checker"
 
 [dependencies]
 shared = { path = "../shared" }
-ownership = { git = "https://github.com/FuelLabs/sway-libs", tag = "v0.18.0" }
-src_5 = { git = "https://github.com/FuelLabs/sway-standards", tag = "v0.2.2" }

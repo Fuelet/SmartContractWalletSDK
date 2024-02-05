@@ -26,76 +26,11 @@
     },
     {
       "typeId": 3,
-      "type": "enum Identity",
-      "components": [
-        {
-          "name": "Address",
-          "type": 6,
-          "typeArguments": null
-        },
-        {
-          "name": "ContractId",
-          "type": 7,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": null
-    },
-    {
-      "typeId": 4,
-      "type": "enum InitializationError",
-      "components": [
-        {
-          "name": "CannotReinitialized",
-          "type": 0,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": null
-    },
-    {
-      "typeId": 5,
       "type": "enum RecoveryCheckerError",
       "components": [
         {
           "name": "NotRecovered",
           "type": 0,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": null
-    },
-    {
-      "typeId": 6,
-      "type": "struct Address",
-      "components": [
-        {
-          "name": "value",
-          "type": 1,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": null
-    },
-    {
-      "typeId": 7,
-      "type": "struct ContractId",
-      "components": [
-        {
-          "name": "value",
-          "type": 1,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": null
-    },
-    {
-      "typeId": 8,
-      "type": "struct OwnershipSet",
-      "components": [
-        {
-          "name": "new_owner",
-          "type": 3,
           "typeArguments": null
         }
       ],
@@ -116,24 +51,6 @@
           "name": "storage",
           "arguments": [
             "read"
-          ]
-        }
-      ]
-    },
-    {
-      "inputs": [],
-      "name": "init",
-      "output": {
-        "name": "",
-        "type": 0,
-        "typeArguments": null
-      },
-      "attributes": [
-        {
-          "name": "storage",
-          "arguments": [
-            "read",
-            "write"
           ]
         }
       ]
@@ -186,7 +103,7 @@
       "logId": 1,
       "loggedType": {
         "name": "",
-        "type": 5,
+        "type": 3,
         "typeArguments": []
       }
     },
@@ -194,28 +111,12 @@
       "logId": 2,
       "loggedType": {
         "name": "",
-        "type": 4,
-        "typeArguments": []
-      }
-    },
-    {
-      "logId": 3,
-      "loggedType": {
-        "name": "",
-        "type": 8,
-        "typeArguments": []
-      }
-    },
-    {
-      "logId": 4,
-      "loggedType": {
-        "name": "",
         "type": 2,
         "typeArguments": []
       }
     },
     {
-      "logId": 5,
+      "logId": 3,
       "loggedType": {
         "name": "",
         "type": 2,
@@ -224,5 +125,15 @@
     }
   ],
   "messagesTypes": [],
-  "configurables": []
+  "configurables": [
+    {
+      "name": "OWNER_PUBLIC_KEY",
+      "configurableType": {
+        "name": "",
+        "type": 1,
+        "typeArguments": null
+      },
+      "offset": 6208
+    }
+  ]
 }
