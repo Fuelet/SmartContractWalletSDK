@@ -14,6 +14,13 @@ typedef struct wire_uint_8_list {
   int32_t len;
 } wire_uint_8_list;
 
+typedef struct wire_SmartContractWallet {
+  struct wire_uint_8_list *bech32_address;
+  struct wire_uint_8_list *r1_public_key;
+  struct wire_uint_8_list *recovery_private_key;
+  struct wire_uint_8_list *node_url;
+} wire_SmartContractWallet;
+
 typedef struct DartCObject *WireSyncReturn;
 
 void store_dart_post_cobject(DartPostCObjectFnType ptr);
@@ -26,31 +33,26 @@ uintptr_t new_dart_opaque(Dart_Handle handle);
 
 intptr_t init_frb_dart_api_dl(void *obj);
 
-void wire_deploy_contract(int64_t port_,
-                          struct wire_uint_8_list *private_key,
-                          struct wire_uint_8_list *node_url);
+void wire_connect__static_method__SmartContractWallet(int64_t port_,
+                                                      struct wire_uint_8_list *r1_public_key,
+                                                      struct wire_uint_8_list *recovery_private_key,
+                                                      struct wire_uint_8_list *node_url);
 
-void wire_get_script(int64_t port_,
-                     struct wire_uint_8_list *private_key,
-                     struct wire_uint_8_list *node_url,
-                     struct wire_uint_8_list *contract_id_str);
+void wire_deploy_contract__method__SmartContractWallet(int64_t port_,
+                                                       struct wire_SmartContractWallet *that);
 
-void wire_get_predicate_address(int64_t port_,
-                                struct wire_uint_8_list *wallet_public_key,
-                                struct wire_uint_8_list *script_hash);
+void wire_gen_transfer_tx_request__method__SmartContractWallet(int64_t port_,
+                                                               struct wire_SmartContractWallet *that,
+                                                               struct wire_uint_8_list *to_bech32,
+                                                               uint64_t amount,
+                                                               struct wire_uint_8_list *asset);
 
-void wire_gen_transfer_tx_request(int64_t port_,
-                                  struct wire_uint_8_list *node_url,
-                                  struct wire_uint_8_list *wallet_public_key,
-                                  struct wire_uint_8_list *script_hash,
-                                  struct wire_uint_8_list *to,
-                                  uint64_t amount,
-                                  struct wire_uint_8_list *asset);
+void wire_send_tx__method__SmartContractWallet(int64_t port_,
+                                               struct wire_SmartContractWallet *that,
+                                               struct wire_uint_8_list *encoded_tx,
+                                               struct wire_uint_8_list *signature);
 
-void wire_send_tx(int64_t port_,
-                  struct wire_uint_8_list *node_url,
-                  struct wire_uint_8_list *encoded_tx,
-                  struct wire_uint_8_list *signature);
+struct wire_SmartContractWallet *new_box_autoadd_smart_contract_wallet_0(void);
 
 struct wire_uint_8_list *new_uint_8_list_0(int32_t len);
 
@@ -58,11 +60,11 @@ void free_WireSyncReturn(WireSyncReturn ptr);
 
 static int64_t dummy_method_to_enforce_bundling(void) {
     int64_t dummy_var = 0;
-    dummy_var ^= ((int64_t) (void*) wire_deploy_contract);
-    dummy_var ^= ((int64_t) (void*) wire_get_script);
-    dummy_var ^= ((int64_t) (void*) wire_get_predicate_address);
-    dummy_var ^= ((int64_t) (void*) wire_gen_transfer_tx_request);
-    dummy_var ^= ((int64_t) (void*) wire_send_tx);
+    dummy_var ^= ((int64_t) (void*) wire_connect__static_method__SmartContractWallet);
+    dummy_var ^= ((int64_t) (void*) wire_deploy_contract__method__SmartContractWallet);
+    dummy_var ^= ((int64_t) (void*) wire_gen_transfer_tx_request__method__SmartContractWallet);
+    dummy_var ^= ((int64_t) (void*) wire_send_tx__method__SmartContractWallet);
+    dummy_var ^= ((int64_t) (void*) new_box_autoadd_smart_contract_wallet_0);
     dummy_var ^= ((int64_t) (void*) new_uint_8_list_0);
     dummy_var ^= ((int64_t) (void*) free_WireSyncReturn);
     dummy_var ^= ((int64_t) (void*) store_dart_post_cobject);

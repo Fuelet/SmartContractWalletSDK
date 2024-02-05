@@ -22,15 +22,15 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
   }
 
   @protected
-  int api2wire_u64(int raw) {
-    return raw;
+  ffi.Pointer<wire_SmartContractWallet> api2wire_box_autoadd_smart_contract_wallet(SmartContractWallet raw) {
+    final ptr = inner.new_box_autoadd_smart_contract_wallet_0();
+    _api_fill_to_wire_smart_contract_wallet(raw, ptr.ref);
+    return ptr;
   }
 
   @protected
-  ffi.Pointer<wire_uint_8_list> api2wire_u8_array_32(U8Array32 raw) {
-    final ans = inner.new_uint_8_list_0(32);
-    ans.ref.ptr.asTypedList(32).setAll(0, raw);
-    return ans;
+  int api2wire_u64(int raw) {
+    return raw;
   }
 
   @protected
@@ -42,6 +42,17 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
 // Section: finalizer
 
 // Section: api_fill_to_wire
+
+  void _api_fill_to_wire_box_autoadd_smart_contract_wallet(SmartContractWallet apiObj, ffi.Pointer<wire_SmartContractWallet> wireObj) {
+    _api_fill_to_wire_smart_contract_wallet(apiObj, wireObj.ref);
+  }
+
+  void _api_fill_to_wire_smart_contract_wallet(SmartContractWallet apiObj, wire_SmartContractWallet wireObj) {
+    wireObj.bech32_address = api2wire_String(apiObj.bech32Address);
+    wireObj.r1_public_key = api2wire_String(apiObj.r1PublicKey);
+    wireObj.recovery_private_key = api2wire_String(apiObj.recoveryPrivateKey);
+    wireObj.node_url = api2wire_String(apiObj.nodeUrl);
+  }
 }
 
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_positional_boolean_parameters, annotate_overrides, constant_identifier_names
@@ -120,92 +131,78 @@ class FueletSmartContractWalletWire implements FlutterRustBridgeWireBase {
   late final _init_frb_dart_api_dlPtr = _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<ffi.Void>)>>('init_frb_dart_api_dl');
   late final _init_frb_dart_api_dl = _init_frb_dart_api_dlPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
 
-  void wire_deploy_contract(
+  void wire_connect__static_method__SmartContractWallet(
     int port_,
-    ffi.Pointer<wire_uint_8_list> private_key,
+    ffi.Pointer<wire_uint_8_list> r1_public_key,
+    ffi.Pointer<wire_uint_8_list> recovery_private_key,
     ffi.Pointer<wire_uint_8_list> node_url,
   ) {
-    return _wire_deploy_contract(
+    return _wire_connect__static_method__SmartContractWallet(
       port_,
-      private_key,
+      r1_public_key,
+      recovery_private_key,
       node_url,
     );
   }
 
-  late final _wire_deploy_contractPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_deploy_contract');
-  late final _wire_deploy_contract = _wire_deploy_contractPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
+  late final _wire_connect__static_method__SmartContractWalletPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_connect__static_method__SmartContractWallet');
+  late final _wire_connect__static_method__SmartContractWallet = _wire_connect__static_method__SmartContractWalletPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
 
-  void wire_get_script(
+  void wire_deploy_contract__method__SmartContractWallet(
     int port_,
-    ffi.Pointer<wire_uint_8_list> private_key,
-    ffi.Pointer<wire_uint_8_list> node_url,
-    ffi.Pointer<wire_uint_8_list> contract_id_str,
+    ffi.Pointer<wire_SmartContractWallet> that,
   ) {
-    return _wire_get_script(
+    return _wire_deploy_contract__method__SmartContractWallet(
       port_,
-      private_key,
-      node_url,
-      contract_id_str,
+      that,
     );
   }
 
-  late final _wire_get_scriptPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_get_script');
-  late final _wire_get_script = _wire_get_scriptPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
+  late final _wire_deploy_contract__method__SmartContractWalletPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_SmartContractWallet>)>>('wire_deploy_contract__method__SmartContractWallet');
+  late final _wire_deploy_contract__method__SmartContractWallet = _wire_deploy_contract__method__SmartContractWalletPtr.asFunction<void Function(int, ffi.Pointer<wire_SmartContractWallet>)>();
 
-  void wire_get_predicate_address(
+  void wire_gen_transfer_tx_request__method__SmartContractWallet(
     int port_,
-    ffi.Pointer<wire_uint_8_list> wallet_public_key,
-    ffi.Pointer<wire_uint_8_list> script_hash,
-  ) {
-    return _wire_get_predicate_address(
-      port_,
-      wallet_public_key,
-      script_hash,
-    );
-  }
-
-  late final _wire_get_predicate_addressPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_get_predicate_address');
-  late final _wire_get_predicate_address = _wire_get_predicate_addressPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
-
-  void wire_gen_transfer_tx_request(
-    int port_,
-    ffi.Pointer<wire_uint_8_list> node_url,
-    ffi.Pointer<wire_uint_8_list> wallet_public_key,
-    ffi.Pointer<wire_uint_8_list> script_hash,
-    ffi.Pointer<wire_uint_8_list> to,
+    ffi.Pointer<wire_SmartContractWallet> that,
+    ffi.Pointer<wire_uint_8_list> to_bech32,
     int amount,
     ffi.Pointer<wire_uint_8_list> asset,
   ) {
-    return _wire_gen_transfer_tx_request(
+    return _wire_gen_transfer_tx_request__method__SmartContractWallet(
       port_,
-      node_url,
-      wallet_public_key,
-      script_hash,
-      to,
+      that,
+      to_bech32,
       amount,
       asset,
     );
   }
 
-  late final _wire_gen_transfer_tx_requestPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Uint64, ffi.Pointer<wire_uint_8_list>)>>('wire_gen_transfer_tx_request');
-  late final _wire_gen_transfer_tx_request = _wire_gen_transfer_tx_requestPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, int, ffi.Pointer<wire_uint_8_list>)>();
+  late final _wire_gen_transfer_tx_request__method__SmartContractWalletPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_SmartContractWallet>, ffi.Pointer<wire_uint_8_list>, ffi.Uint64, ffi.Pointer<wire_uint_8_list>)>>('wire_gen_transfer_tx_request__method__SmartContractWallet');
+  late final _wire_gen_transfer_tx_request__method__SmartContractWallet = _wire_gen_transfer_tx_request__method__SmartContractWalletPtr.asFunction<void Function(int, ffi.Pointer<wire_SmartContractWallet>, ffi.Pointer<wire_uint_8_list>, int, ffi.Pointer<wire_uint_8_list>)>();
 
-  void wire_send_tx(
+  void wire_send_tx__method__SmartContractWallet(
     int port_,
-    ffi.Pointer<wire_uint_8_list> node_url,
+    ffi.Pointer<wire_SmartContractWallet> that,
     ffi.Pointer<wire_uint_8_list> encoded_tx,
     ffi.Pointer<wire_uint_8_list> signature,
   ) {
-    return _wire_send_tx(
+    return _wire_send_tx__method__SmartContractWallet(
       port_,
-      node_url,
+      that,
       encoded_tx,
       signature,
     );
   }
 
-  late final _wire_send_txPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_send_tx');
-  late final _wire_send_tx = _wire_send_txPtr.asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
+  late final _wire_send_tx__method__SmartContractWalletPtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64, ffi.Pointer<wire_SmartContractWallet>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>>('wire_send_tx__method__SmartContractWallet');
+  late final _wire_send_tx__method__SmartContractWallet = _wire_send_tx__method__SmartContractWalletPtr.asFunction<void Function(int, ffi.Pointer<wire_SmartContractWallet>, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
+
+  ffi.Pointer<wire_SmartContractWallet> new_box_autoadd_smart_contract_wallet_0() {
+    return _new_box_autoadd_smart_contract_wallet_0();
+  }
+
+  late final _new_box_autoadd_smart_contract_wallet_0Ptr = _lookup<ffi.NativeFunction<ffi.Pointer<wire_SmartContractWallet> Function()>>('new_box_autoadd_smart_contract_wallet_0');
+  late final _new_box_autoadd_smart_contract_wallet_0 = _new_box_autoadd_smart_contract_wallet_0Ptr.asFunction<ffi.Pointer<wire_SmartContractWallet> Function()>();
 
   ffi.Pointer<wire_uint_8_list> new_uint_8_list_0(
     int len,
@@ -237,6 +234,16 @@ final class wire_uint_8_list extends ffi.Struct {
 
   @ffi.Int32()
   external int len;
+}
+
+final class wire_SmartContractWallet extends ffi.Struct {
+  external ffi.Pointer<wire_uint_8_list> bech32_address;
+
+  external ffi.Pointer<wire_uint_8_list> r1_public_key;
+
+  external ffi.Pointer<wire_uint_8_list> recovery_private_key;
+
+  external ffi.Pointer<wire_uint_8_list> node_url;
 }
 
 typedef DartPostCObjectFnType = ffi.Pointer<ffi.NativeFunction<ffi.Bool Function(DartPort port_id, ffi.Pointer<ffi.Void> message)>>;

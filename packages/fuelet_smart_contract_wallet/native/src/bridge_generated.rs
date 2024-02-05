@@ -22,101 +22,72 @@ use std::sync::Arc;
 
 // Section: wire functions
 
-fn wire_deploy_contract_impl(
+fn wire_connect__static_method__SmartContractWallet_impl(
     port_: MessagePort,
-    private_key: impl Wire2Api<String> + UnwindSafe,
+    r1_public_key: impl Wire2Api<String> + UnwindSafe,
+    recovery_private_key: impl Wire2Api<String> + UnwindSafe,
     node_url: impl Wire2Api<String> + UnwindSafe,
 ) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, String, _>(
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, SmartContractWallet, _>(
         WrapInfo {
-            debug_name: "deploy_contract",
+            debug_name: "connect__static_method__SmartContractWallet",
             port: Some(port_),
             mode: FfiCallMode::Normal,
         },
         move || {
-            let api_private_key = private_key.wire2api();
+            let api_r1_public_key = r1_public_key.wire2api();
+            let api_recovery_private_key = recovery_private_key.wire2api();
             let api_node_url = node_url.wire2api();
-            move |task_callback| Result::<_, ()>::Ok(deploy_contract(api_private_key, api_node_url))
-        },
-    )
-}
-fn wire_get_script_impl(
-    port_: MessagePort,
-    private_key: impl Wire2Api<String> + UnwindSafe,
-    node_url: impl Wire2Api<String> + UnwindSafe,
-    contract_id_str: impl Wire2Api<String> + UnwindSafe,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, [u8; 32], _>(
-        WrapInfo {
-            debug_name: "get_script",
-            port: Some(port_),
-            mode: FfiCallMode::Normal,
-        },
-        move || {
-            let api_private_key = private_key.wire2api();
-            let api_node_url = node_url.wire2api();
-            let api_contract_id_str = contract_id_str.wire2api();
             move |task_callback| {
-                Result::<_, ()>::Ok(get_script(
-                    api_private_key,
+                Result::<_, ()>::Ok(SmartContractWallet::connect(
+                    api_r1_public_key,
+                    api_recovery_private_key,
                     api_node_url,
-                    api_contract_id_str,
                 ))
             }
         },
     )
 }
-fn wire_get_predicate_address_impl(
+fn wire_deploy_contract__method__SmartContractWallet_impl(
     port_: MessagePort,
-    wallet_public_key: impl Wire2Api<String> + UnwindSafe,
-    script_hash: impl Wire2Api<[u8; 32]> + UnwindSafe,
+    that: impl Wire2Api<SmartContractWallet> + UnwindSafe,
 ) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, String, _>(
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, (), _>(
         WrapInfo {
-            debug_name: "get_predicate_address",
+            debug_name: "deploy_contract__method__SmartContractWallet",
             port: Some(port_),
             mode: FfiCallMode::Normal,
         },
         move || {
-            let api_wallet_public_key = wallet_public_key.wire2api();
-            let api_script_hash = script_hash.wire2api();
+            let api_that = that.wire2api();
             move |task_callback| {
-                Result::<_, ()>::Ok(get_predicate_address(
-                    api_wallet_public_key,
-                    api_script_hash,
-                ))
+                Result::<_, ()>::Ok(SmartContractWallet::deploy_contract(&api_that))
             }
         },
     )
 }
-fn wire_gen_transfer_tx_request_impl(
+fn wire_gen_transfer_tx_request__method__SmartContractWallet_impl(
     port_: MessagePort,
-    node_url: impl Wire2Api<String> + UnwindSafe,
-    wallet_public_key: impl Wire2Api<String> + UnwindSafe,
-    script_hash: impl Wire2Api<[u8; 32]> + UnwindSafe,
-    to: impl Wire2Api<String> + UnwindSafe,
+    that: impl Wire2Api<SmartContractWallet> + UnwindSafe,
+    to_bech32: impl Wire2Api<String> + UnwindSafe,
     amount: impl Wire2Api<u64> + UnwindSafe,
     asset: impl Wire2Api<String> + UnwindSafe,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, (Vec<u8>, Vec<u8>), _>(
         WrapInfo {
-            debug_name: "gen_transfer_tx_request",
+            debug_name: "gen_transfer_tx_request__method__SmartContractWallet",
             port: Some(port_),
             mode: FfiCallMode::Normal,
         },
         move || {
-            let api_node_url = node_url.wire2api();
-            let api_wallet_public_key = wallet_public_key.wire2api();
-            let api_script_hash = script_hash.wire2api();
-            let api_to = to.wire2api();
+            let api_that = that.wire2api();
+            let api_to_bech32 = to_bech32.wire2api();
             let api_amount = amount.wire2api();
             let api_asset = asset.wire2api();
             move |task_callback| {
-                Result::<_, ()>::Ok(gen_transfer_tx_request(
-                    api_node_url,
-                    api_wallet_public_key,
-                    api_script_hash,
-                    api_to,
+                Result::<_, ()>::Ok(SmartContractWallet::gen_transfer_tx_request(
+                    &api_that,
+                    api_to_bech32,
                     api_amount,
                     api_asset,
                 ))
@@ -124,24 +95,28 @@ fn wire_gen_transfer_tx_request_impl(
         },
     )
 }
-fn wire_send_tx_impl(
+fn wire_send_tx__method__SmartContractWallet_impl(
     port_: MessagePort,
-    node_url: impl Wire2Api<String> + UnwindSafe,
+    that: impl Wire2Api<SmartContractWallet> + UnwindSafe,
     encoded_tx: impl Wire2Api<Vec<u8>> + UnwindSafe,
     signature: impl Wire2Api<Vec<u8>> + UnwindSafe,
 ) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap::<_, _, _, String, _>(
         WrapInfo {
-            debug_name: "send_tx",
+            debug_name: "send_tx__method__SmartContractWallet",
             port: Some(port_),
             mode: FfiCallMode::Normal,
         },
         move || {
-            let api_node_url = node_url.wire2api();
+            let api_that = that.wire2api();
             let api_encoded_tx = encoded_tx.wire2api();
             let api_signature = signature.wire2api();
             move |task_callback| {
-                Result::<_, ()>::Ok(send_tx(api_node_url, api_encoded_tx, api_signature))
+                Result::<_, ()>::Ok(SmartContractWallet::send_tx(
+                    &api_that,
+                    api_encoded_tx,
+                    api_signature,
+                ))
             }
         },
     )
@@ -182,6 +157,24 @@ impl Wire2Api<u8> for u8 {
 
 // Section: impl IntoDart
 
+impl support::IntoDart for SmartContractWallet {
+    fn into_dart(self) -> support::DartAbi {
+        vec![
+            self.bech32_address.into_into_dart().into_dart(),
+            self.r1_public_key.into_into_dart().into_dart(),
+            self.recovery_private_key.into_into_dart().into_dart(),
+            self.node_url.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl support::IntoDartExceptPrimitive for SmartContractWallet {}
+impl rust2dart::IntoIntoDart<SmartContractWallet> for SmartContractWallet {
+    fn into_into_dart(self) -> Self {
+        self
+    }
+}
+
 // Section: executor
 
 support::lazy_static! {
@@ -195,58 +188,46 @@ mod web {
     // Section: wire functions
 
     #[wasm_bindgen]
-    pub fn wire_deploy_contract(port_: MessagePort, private_key: String, node_url: String) {
-        wire_deploy_contract_impl(port_, private_key, node_url)
-    }
-
-    #[wasm_bindgen]
-    pub fn wire_get_script(
+    pub fn wire_connect__static_method__SmartContractWallet(
         port_: MessagePort,
-        private_key: String,
+        r1_public_key: String,
+        recovery_private_key: String,
         node_url: String,
-        contract_id_str: String,
     ) {
-        wire_get_script_impl(port_, private_key, node_url, contract_id_str)
-    }
-
-    #[wasm_bindgen]
-    pub fn wire_get_predicate_address(
-        port_: MessagePort,
-        wallet_public_key: String,
-        script_hash: Box<[u8]>,
-    ) {
-        wire_get_predicate_address_impl(port_, wallet_public_key, script_hash)
-    }
-
-    #[wasm_bindgen]
-    pub fn wire_gen_transfer_tx_request(
-        port_: MessagePort,
-        node_url: String,
-        wallet_public_key: String,
-        script_hash: Box<[u8]>,
-        to: String,
-        amount: u64,
-        asset: String,
-    ) {
-        wire_gen_transfer_tx_request_impl(
+        wire_connect__static_method__SmartContractWallet_impl(
             port_,
+            r1_public_key,
+            recovery_private_key,
             node_url,
-            wallet_public_key,
-            script_hash,
-            to,
-            amount,
-            asset,
         )
     }
 
     #[wasm_bindgen]
-    pub fn wire_send_tx(
+    pub fn wire_deploy_contract__method__SmartContractWallet(port_: MessagePort, that: JsValue) {
+        wire_deploy_contract__method__SmartContractWallet_impl(port_, that)
+    }
+
+    #[wasm_bindgen]
+    pub fn wire_gen_transfer_tx_request__method__SmartContractWallet(
         port_: MessagePort,
-        node_url: String,
+        that: JsValue,
+        to_bech32: String,
+        amount: u64,
+        asset: String,
+    ) {
+        wire_gen_transfer_tx_request__method__SmartContractWallet_impl(
+            port_, that, to_bech32, amount, asset,
+        )
+    }
+
+    #[wasm_bindgen]
+    pub fn wire_send_tx__method__SmartContractWallet(
+        port_: MessagePort,
+        that: JsValue,
         encoded_tx: Box<[u8]>,
         signature: Box<[u8]>,
     ) {
-        wire_send_tx_impl(port_, node_url, encoded_tx, signature)
+        wire_send_tx__method__SmartContractWallet_impl(port_, that, encoded_tx, signature)
     }
 
     // Section: allocate functions
@@ -261,12 +242,24 @@ mod web {
         }
     }
 
-    impl Wire2Api<[u8; 32]> for Box<[u8]> {
-        fn wire2api(self) -> [u8; 32] {
-            let vec: Vec<u8> = self.wire2api();
-            support::from_vec_to_array(vec)
+    impl Wire2Api<SmartContractWallet> for JsValue {
+        fn wire2api(self) -> SmartContractWallet {
+            let self_ = self.dyn_into::<JsArray>().unwrap();
+            assert_eq!(
+                self_.length(),
+                4,
+                "Expected 4 elements, got {}",
+                self_.length()
+            );
+            SmartContractWallet {
+                bech32_address: self_.get(0).wire2api(),
+                r1_public_key: self_.get(1).wire2api(),
+                recovery_private_key: self_.get(2).wire2api(),
+                node_url: self_.get(3).wire2api(),
+            }
         }
     }
+
     impl Wire2Api<Vec<u8>> for Box<[u8]> {
         fn wire2api(self) -> Vec<u8> {
             self.into_vec()
@@ -297,12 +290,6 @@ mod web {
             self.unchecked_into_f64() as _
         }
     }
-    impl Wire2Api<[u8; 32]> for JsValue {
-        fn wire2api(self) -> [u8; 32] {
-            let vec: Vec<u8> = self.wire2api();
-            support::from_vec_to_array(vec)
-        }
-    }
     impl Wire2Api<Vec<u8>> for JsValue {
         fn wire2api(self) -> Vec<u8> {
             self.unchecked_into::<js_sys::Uint8Array>().to_vec().into()
@@ -318,65 +305,57 @@ mod io {
     // Section: wire functions
 
     #[no_mangle]
-    pub extern "C" fn wire_deploy_contract(
+    pub extern "C" fn wire_connect__static_method__SmartContractWallet(
         port_: i64,
-        private_key: *mut wire_uint_8_list,
+        r1_public_key: *mut wire_uint_8_list,
+        recovery_private_key: *mut wire_uint_8_list,
         node_url: *mut wire_uint_8_list,
     ) {
-        wire_deploy_contract_impl(port_, private_key, node_url)
-    }
-
-    #[no_mangle]
-    pub extern "C" fn wire_get_script(
-        port_: i64,
-        private_key: *mut wire_uint_8_list,
-        node_url: *mut wire_uint_8_list,
-        contract_id_str: *mut wire_uint_8_list,
-    ) {
-        wire_get_script_impl(port_, private_key, node_url, contract_id_str)
-    }
-
-    #[no_mangle]
-    pub extern "C" fn wire_get_predicate_address(
-        port_: i64,
-        wallet_public_key: *mut wire_uint_8_list,
-        script_hash: *mut wire_uint_8_list,
-    ) {
-        wire_get_predicate_address_impl(port_, wallet_public_key, script_hash)
-    }
-
-    #[no_mangle]
-    pub extern "C" fn wire_gen_transfer_tx_request(
-        port_: i64,
-        node_url: *mut wire_uint_8_list,
-        wallet_public_key: *mut wire_uint_8_list,
-        script_hash: *mut wire_uint_8_list,
-        to: *mut wire_uint_8_list,
-        amount: u64,
-        asset: *mut wire_uint_8_list,
-    ) {
-        wire_gen_transfer_tx_request_impl(
+        wire_connect__static_method__SmartContractWallet_impl(
             port_,
+            r1_public_key,
+            recovery_private_key,
             node_url,
-            wallet_public_key,
-            script_hash,
-            to,
-            amount,
-            asset,
         )
     }
 
     #[no_mangle]
-    pub extern "C" fn wire_send_tx(
+    pub extern "C" fn wire_deploy_contract__method__SmartContractWallet(
         port_: i64,
-        node_url: *mut wire_uint_8_list,
+        that: *mut wire_SmartContractWallet,
+    ) {
+        wire_deploy_contract__method__SmartContractWallet_impl(port_, that)
+    }
+
+    #[no_mangle]
+    pub extern "C" fn wire_gen_transfer_tx_request__method__SmartContractWallet(
+        port_: i64,
+        that: *mut wire_SmartContractWallet,
+        to_bech32: *mut wire_uint_8_list,
+        amount: u64,
+        asset: *mut wire_uint_8_list,
+    ) {
+        wire_gen_transfer_tx_request__method__SmartContractWallet_impl(
+            port_, that, to_bech32, amount, asset,
+        )
+    }
+
+    #[no_mangle]
+    pub extern "C" fn wire_send_tx__method__SmartContractWallet(
+        port_: i64,
+        that: *mut wire_SmartContractWallet,
         encoded_tx: *mut wire_uint_8_list,
         signature: *mut wire_uint_8_list,
     ) {
-        wire_send_tx_impl(port_, node_url, encoded_tx, signature)
+        wire_send_tx__method__SmartContractWallet_impl(port_, that, encoded_tx, signature)
     }
 
     // Section: allocate functions
+
+    #[no_mangle]
+    pub extern "C" fn new_box_autoadd_smart_contract_wallet_0() -> *mut wire_SmartContractWallet {
+        support::new_leak_box_ptr(wire_SmartContractWallet::new_with_null_ptr())
+    }
 
     #[no_mangle]
     pub extern "C" fn new_uint_8_list_0(len: i32) -> *mut wire_uint_8_list {
@@ -397,13 +376,23 @@ mod io {
             String::from_utf8_lossy(&vec).into_owned()
         }
     }
-
-    impl Wire2Api<[u8; 32]> for *mut wire_uint_8_list {
-        fn wire2api(self) -> [u8; 32] {
-            let vec: Vec<u8> = self.wire2api();
-            support::from_vec_to_array(vec)
+    impl Wire2Api<SmartContractWallet> for *mut wire_SmartContractWallet {
+        fn wire2api(self) -> SmartContractWallet {
+            let wrap = unsafe { support::box_from_leak_ptr(self) };
+            Wire2Api::<SmartContractWallet>::wire2api(*wrap).into()
         }
     }
+    impl Wire2Api<SmartContractWallet> for wire_SmartContractWallet {
+        fn wire2api(self) -> SmartContractWallet {
+            SmartContractWallet {
+                bech32_address: self.bech32_address.wire2api(),
+                r1_public_key: self.r1_public_key.wire2api(),
+                recovery_private_key: self.recovery_private_key.wire2api(),
+                node_url: self.node_url.wire2api(),
+            }
+        }
+    }
+
     impl Wire2Api<Vec<u8>> for *mut wire_uint_8_list {
         fn wire2api(self) -> Vec<u8> {
             unsafe {
@@ -413,6 +402,15 @@ mod io {
         }
     }
     // Section: wire structs
+
+    #[repr(C)]
+    #[derive(Clone)]
+    pub struct wire_SmartContractWallet {
+        bech32_address: *mut wire_uint_8_list,
+        r1_public_key: *mut wire_uint_8_list,
+        recovery_private_key: *mut wire_uint_8_list,
+        node_url: *mut wire_uint_8_list,
+    }
 
     #[repr(C)]
     #[derive(Clone)]
@@ -430,6 +428,23 @@ mod io {
     impl<T> NewWithNullPtr for *mut T {
         fn new_with_null_ptr() -> Self {
             std::ptr::null_mut()
+        }
+    }
+
+    impl NewWithNullPtr for wire_SmartContractWallet {
+        fn new_with_null_ptr() -> Self {
+            Self {
+                bech32_address: core::ptr::null_mut(),
+                r1_public_key: core::ptr::null_mut(),
+                recovery_private_key: core::ptr::null_mut(),
+                node_url: core::ptr::null_mut(),
+            }
+        }
+    }
+
+    impl Default for wire_SmartContractWallet {
+        fn default() -> Self {
+            Self::new_with_null_ptr()
         }
     }
 

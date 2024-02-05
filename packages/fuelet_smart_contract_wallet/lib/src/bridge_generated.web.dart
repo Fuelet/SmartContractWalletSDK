@@ -24,13 +24,23 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
   }
 
   @protected
-  Object api2wire_u64(int raw) {
-    return castNativeBigInt(raw);
+  List<dynamic> api2wire_box_autoadd_smart_contract_wallet(SmartContractWallet raw) {
+    return api2wire_smart_contract_wallet(raw);
   }
 
   @protected
-  Uint8List api2wire_u8_array_32(U8Array32 raw) {
-    return Uint8List.fromList(raw);
+  List<dynamic> api2wire_smart_contract_wallet(SmartContractWallet raw) {
+    return [
+      api2wire_String(raw.bech32Address),
+      api2wire_String(raw.r1PublicKey),
+      api2wire_String(raw.recoveryPrivateKey),
+      api2wire_String(raw.nodeUrl)
+    ];
+  }
+
+  @protected
+  Object api2wire_u64(int raw) {
+    return castNativeBigInt(raw);
   }
 
   @protected
@@ -50,15 +60,13 @@ external FueletSmartContractWalletWasmModule get wasmModule;
 class FueletSmartContractWalletWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
   external FueletSmartContractWalletWasmModule bind(dynamic thisArg, String moduleName);
-  external dynamic /* void */ wire_deploy_contract(NativePortType port_, String private_key, String node_url);
+  external dynamic /* void */ wire_connect__static_method__SmartContractWallet(NativePortType port_, String r1_public_key, String recovery_private_key, String node_url);
 
-  external dynamic /* void */ wire_get_script(NativePortType port_, String private_key, String node_url, String contract_id_str);
+  external dynamic /* void */ wire_deploy_contract__method__SmartContractWallet(NativePortType port_, List<dynamic> that);
 
-  external dynamic /* void */ wire_get_predicate_address(NativePortType port_, String wallet_public_key, Uint8List script_hash);
+  external dynamic /* void */ wire_gen_transfer_tx_request__method__SmartContractWallet(NativePortType port_, List<dynamic> that, String to_bech32, Object amount, String asset);
 
-  external dynamic /* void */ wire_gen_transfer_tx_request(NativePortType port_, String node_url, String wallet_public_key, Uint8List script_hash, String to, Object amount, String asset);
-
-  external dynamic /* void */ wire_send_tx(NativePortType port_, String node_url, Uint8List encoded_tx, Uint8List signature);
+  external dynamic /* void */ wire_send_tx__method__SmartContractWallet(NativePortType port_, List<dynamic> that, Uint8List encoded_tx, Uint8List signature);
 }
 
 // Section: WASM wire connector
@@ -66,13 +74,11 @@ class FueletSmartContractWalletWasmModule implements WasmModule {
 class FueletSmartContractWalletWire extends FlutterRustBridgeWasmWireBase<FueletSmartContractWalletWasmModule> {
   FueletSmartContractWalletWire(FutureOr<WasmModule> module) : super(WasmModule.cast<FueletSmartContractWalletWasmModule>(module));
 
-  void wire_deploy_contract(NativePortType port_, String private_key, String node_url) => wasmModule.wire_deploy_contract(port_, private_key, node_url);
+  void wire_connect__static_method__SmartContractWallet(NativePortType port_, String r1_public_key, String recovery_private_key, String node_url) => wasmModule.wire_connect__static_method__SmartContractWallet(port_, r1_public_key, recovery_private_key, node_url);
 
-  void wire_get_script(NativePortType port_, String private_key, String node_url, String contract_id_str) => wasmModule.wire_get_script(port_, private_key, node_url, contract_id_str);
+  void wire_deploy_contract__method__SmartContractWallet(NativePortType port_, List<dynamic> that) => wasmModule.wire_deploy_contract__method__SmartContractWallet(port_, that);
 
-  void wire_get_predicate_address(NativePortType port_, String wallet_public_key, Uint8List script_hash) => wasmModule.wire_get_predicate_address(port_, wallet_public_key, script_hash);
+  void wire_gen_transfer_tx_request__method__SmartContractWallet(NativePortType port_, List<dynamic> that, String to_bech32, Object amount, String asset) => wasmModule.wire_gen_transfer_tx_request__method__SmartContractWallet(port_, that, to_bech32, amount, asset);
 
-  void wire_gen_transfer_tx_request(NativePortType port_, String node_url, String wallet_public_key, Uint8List script_hash, String to, Object amount, String asset) => wasmModule.wire_gen_transfer_tx_request(port_, node_url, wallet_public_key, script_hash, to, amount, asset);
-
-  void wire_send_tx(NativePortType port_, String node_url, Uint8List encoded_tx, Uint8List signature) => wasmModule.wire_send_tx(port_, node_url, encoded_tx, signature);
+  void wire_send_tx__method__SmartContractWallet(NativePortType port_, List<dynamic> that, Uint8List encoded_tx, Uint8List signature) => wasmModule.wire_send_tx__method__SmartContractWallet(port_, that, encoded_tx, signature);
 }
