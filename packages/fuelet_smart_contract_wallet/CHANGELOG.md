@@ -1,3 +1,7 @@
+## 1.2.2
+
+ - Bump "fuelet_smart_contract_wallet" to `1.2.2`.
+
 ## 1.2.1
 
  - Fix build scripts
