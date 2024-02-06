@@ -1,44 +1,22 @@
-use std::io::Write;
-use std::ops::Deref;
-use std::str::FromStr;
-
 use fuel_crypto::fuel_types::ContractId;
 use fuel_crypto::SecretKey;
-use fuel_tx::{Bytes32, Salt, StorageSlot};
+use fuel_tx::Salt;
 use fuels::accounts::predicate::Predicate;
-use fuels::core::Configurables;
-use fuels::prelude::{Contract, StorageConfiguration, WalletUnlocked};
+use fuels::prelude::{Contract, WalletUnlocked};
 use fuels::types::Bits256;
 use sha2::{Digest, Sha256};
 
 use crate::{gen_consts, model, util};
-use crate::error::CustomResult;
-
-fn load_contract_from_code(code: &mut Vec<u8>, configurables: Configurables, storage_slots: Vec<StorageSlot>, salt: Salt) -> CustomResult<Contract> {
-    configurables.update_constants_in(code);
-    Ok(Contract::new(code.clone(), salt, storage_slots))
-}
-
-fn get_storage_slots() -> Vec<StorageSlot> {
-    gen_consts::RECOVERY_CHECKER_STORAGE_SLOTS
-        .to_vec()
-        .iter()
-        .map(|(k, v)| StorageSlot::new(Bytes32::from_str(k).unwrap(), Bytes32::from_str(v).unwrap()))
-        .collect::<Vec<_>>()
-}
+use crate::features::forc_utils;
 
 pub fn get_recovery_checker_contract(recovery_secret_key: &SecretKey) -> Contract {
     // TODO: derive from WalletUnlocked
     let pub_key = recovery_secret_key.public_key();
     let configurables = model::RecoveryCheckerContractConfigurables::new()
         .with_OWNER_PUBLIC_KEY(Bits256(pub_key.hash().into()));
-
-    StorageConfiguration::new(false, vec![]);
-
-    let mut contract_code = hex::decode(gen_consts::RECOVERY_CHECKER_CONTRACT_CODE).unwrap();
-    let storage_slots = get_storage_slots();
-
-    load_contract_from_code(&mut contract_code, configurables.into(), storage_slots, Salt::default()).unwrap()
+    let storage_slots = forc_utils::convert_storage_slots(gen_consts::RECOVERY_CHECKER_STORAGE_SLOTS.to_vec());
+    forc_utils::load_contract_from_code(gen_consts::RECOVERY_CHECKER_CONTRACT_CODE, configurables.into(),
+                            storage_slots, Salt::default()).unwrap()
 }
 
 pub async fn deploy_contract(wallet: &WalletUnlocked, contract: Contract) {
@@ -48,15 +26,7 @@ pub async fn deploy_contract(wallet: &WalletUnlocked, contract: Contract) {
 pub fn get_script(wallet: &WalletUnlocked, contract_id: ContractId) -> model::WithdrawalScript<WalletUnlocked> {
     let configurables = model::WithdrawalScriptConfigurables::new()
         .with_RECOVERY_CHECKER_CONTRACT(contract_id);
-    let script_code = hex::decode(gen_consts::WITHDRAWAL_SCRIPT_CODE).unwrap();
-
-    let mut temp_file = tempfile::Builder::new()
-        .suffix(".bin").tempfile().unwrap();
-    temp_file.write_all(script_code.deref()).unwrap();
-    let path = temp_file.path().to_str().unwrap();
-
-    model::WithdrawalScript::new(wallet.clone(), path)
-        .with_configurables(configurables)
+    forc_utils::load_script_from_code(wallet, gen_consts::WITHDRAWAL_SCRIPT_CODE, configurables)
 }
 
 pub fn get_script_hash(script: &model::WithdrawalScript<WalletUnlocked>) -> [u8; 32] {
