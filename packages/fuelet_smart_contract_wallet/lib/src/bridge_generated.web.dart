@@ -18,6 +18,35 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
 
 // Section: api2wire
 
+  @protected
+  String api2wire_String(String raw) {
+    return raw;
+  }
+
+  @protected
+  List<dynamic> api2wire_box_autoadd_smart_contract_wallet(SmartContractWallet raw) {
+    return api2wire_smart_contract_wallet(raw);
+  }
+
+  @protected
+  List<dynamic> api2wire_smart_contract_wallet(SmartContractWallet raw) {
+    return [
+      api2wire_String(raw.bech32Address),
+      api2wire_String(raw.r1PublicKey),
+      api2wire_String(raw.recoveryPrivateKey),
+      api2wire_String(raw.nodeUrl)
+    ];
+  }
+
+  @protected
+  Object api2wire_u64(int raw) {
+    return castNativeBigInt(raw);
+  }
+
+  @protected
+  Uint8List api2wire_uint_8_list(Uint8List raw) {
+    return raw;
+  }
 // Section: finalizer
 }
 
@@ -31,7 +60,13 @@ external FueletSmartContractWalletWasmModule get wasmModule;
 class FueletSmartContractWalletWasmModule implements WasmModule {
   external Object /* Promise */ call([String? moduleName]);
   external FueletSmartContractWalletWasmModule bind(dynamic thisArg, String moduleName);
-  external dynamic /* void */ wire_plus(NativePortType port_, int a, int b);
+  external dynamic /* void */ wire_connect__static_method__SmartContractWallet(NativePortType port_, String r1_public_key, String recovery_private_key, String node_url);
+
+  external dynamic /* void */ wire_deploy_contract__method__SmartContractWallet(NativePortType port_, List<dynamic> that);
+
+  external dynamic /* void */ wire_gen_transfer_tx_request__method__SmartContractWallet(NativePortType port_, List<dynamic> that, String to_bech32, Object amount, String asset);
+
+  external dynamic /* void */ wire_send_tx__method__SmartContractWallet(NativePortType port_, List<dynamic> that, Uint8List encoded_tx, Uint8List signature);
 }
 
 // Section: WASM wire connector
@@ -39,5 +74,11 @@ class FueletSmartContractWalletWasmModule implements WasmModule {
 class FueletSmartContractWalletWire extends FlutterRustBridgeWasmWireBase<FueletSmartContractWalletWasmModule> {
   FueletSmartContractWalletWire(FutureOr<WasmModule> module) : super(WasmModule.cast<FueletSmartContractWalletWasmModule>(module));
 
-  void wire_plus(NativePortType port_, int a, int b) => wasmModule.wire_plus(port_, a, b);
+  void wire_connect__static_method__SmartContractWallet(NativePortType port_, String r1_public_key, String recovery_private_key, String node_url) => wasmModule.wire_connect__static_method__SmartContractWallet(port_, r1_public_key, recovery_private_key, node_url);
+
+  void wire_deploy_contract__method__SmartContractWallet(NativePortType port_, List<dynamic> that) => wasmModule.wire_deploy_contract__method__SmartContractWallet(port_, that);
+
+  void wire_gen_transfer_tx_request__method__SmartContractWallet(NativePortType port_, List<dynamic> that, String to_bech32, Object amount, String asset) => wasmModule.wire_gen_transfer_tx_request__method__SmartContractWallet(port_, that, to_bech32, amount, asset);
+
+  void wire_send_tx__method__SmartContractWallet(NativePortType port_, List<dynamic> that, Uint8List encoded_tx, Uint8List signature) => wasmModule.wire_send_tx__method__SmartContractWallet(port_, that, encoded_tx, signature);
 }

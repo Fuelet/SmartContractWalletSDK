@@ -16,9 +16,65 @@ import 'package:uuid/uuid.dart';
 import 'bridge_generated.io.dart' if (dart.library.html) 'bridge_generated.web.dart';
 
 abstract class FueletSmartContractWallet {
-  Future<int> plus({required int a, required int b, dynamic hint});
+  Future<SmartContractWallet> connectStaticMethodSmartContractWallet({required String r1PublicKey, required String recoveryPrivateKey, required String nodeUrl, dynamic hint});
 
-  FlutterRustBridgeTaskConstMeta get kPlusConstMeta;
+  FlutterRustBridgeTaskConstMeta get kConnectStaticMethodSmartContractWalletConstMeta;
+
+  Future<void> deployContractMethodSmartContractWallet({required SmartContractWallet that, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kDeployContractMethodSmartContractWalletConstMeta;
+
+  Future<
+      (
+        Uint8List,
+        Uint8List
+      )> genTransferTxRequestMethodSmartContractWallet({required SmartContractWallet that, required String toBech32, required int amount, required String asset, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kGenTransferTxRequestMethodSmartContractWalletConstMeta;
+
+  Future<String> sendTxMethodSmartContractWallet({required SmartContractWallet that, required Uint8List encodedTx, required Uint8List signature, dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kSendTxMethodSmartContractWalletConstMeta;
+}
+
+class SmartContractWallet {
+  final FueletSmartContractWallet bridge;
+  final String bech32Address;
+  final String r1PublicKey;
+  final String recoveryPrivateKey;
+  final String nodeUrl;
+
+  const SmartContractWallet({
+    required this.bridge,
+    required this.bech32Address,
+    required this.r1PublicKey,
+    required this.recoveryPrivateKey,
+    required this.nodeUrl,
+  });
+
+  static Future<SmartContractWallet> connect({required FueletSmartContractWallet bridge, required String r1PublicKey, required String recoveryPrivateKey, required String nodeUrl, dynamic hint}) => bridge.connectStaticMethodSmartContractWallet(r1PublicKey: r1PublicKey, recoveryPrivateKey: recoveryPrivateKey, nodeUrl: nodeUrl, hint: hint);
+
+  Future<void> deployContract({dynamic hint}) => bridge.deployContractMethodSmartContractWallet(
+        that: this,
+      );
+
+  Future<
+      (
+        Uint8List,
+        Uint8List
+      )> genTransferTxRequest({required String toBech32, required int amount, required String asset, dynamic hint}) => bridge
+          .genTransferTxRequestMethodSmartContractWallet(
+        that: this,
+        toBech32: toBech32,
+        amount: amount,
+        asset: asset,
+      );
+
+  Future<String> sendTx({required Uint8List encodedTx, required Uint8List signature, dynamic hint}) => bridge.sendTxMethodSmartContractWallet(
+        that: this,
+        encodedTx: encodedTx,
+        signature: signature,
+      );
 }
 
 class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
@@ -28,27 +84,112 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
   /// Only valid on web/WASM platforms.
   factory FueletSmartContractWalletImpl.wasm(FutureOr<WasmModule> module) => FueletSmartContractWalletImpl(module as ExternalLibrary);
   FueletSmartContractWalletImpl.raw(this._platform);
-  Future<int> plus({required int a, required int b, dynamic hint}) {
-    var arg0 = api2wire_u8(a);
-    var arg1 = api2wire_u8(b);
+  Future<SmartContractWallet> connectStaticMethodSmartContractWallet({required String r1PublicKey, required String recoveryPrivateKey, required String nodeUrl, dynamic hint}) {
+    var arg0 = _platform.api2wire_String(r1PublicKey);
+    var arg1 = _platform.api2wire_String(recoveryPrivateKey);
+    var arg2 = _platform.api2wire_String(nodeUrl);
     return _platform.executeNormal(FlutterRustBridgeTask(
-      callFfi: (port_) => _platform.inner.wire_plus(port_, arg0, arg1),
-      parseSuccessData: _wire2api_u8,
+      callFfi: (port_) => _platform.inner.wire_connect__static_method__SmartContractWallet(port_, arg0, arg1, arg2),
+      parseSuccessData: (d) => _wire2api_smart_contract_wallet(d),
       parseErrorData: null,
-      constMeta: kPlusConstMeta,
+      constMeta: kConnectStaticMethodSmartContractWalletConstMeta,
       argValues: [
-        a,
-        b
+        r1PublicKey,
+        recoveryPrivateKey,
+        nodeUrl
       ],
       hint: hint,
     ));
   }
 
-  FlutterRustBridgeTaskConstMeta get kPlusConstMeta => const FlutterRustBridgeTaskConstMeta(
-        debugName: "plus",
+  FlutterRustBridgeTaskConstMeta get kConnectStaticMethodSmartContractWalletConstMeta => const FlutterRustBridgeTaskConstMeta(
+        debugName: "connect__static_method__SmartContractWallet",
         argNames: [
-          "a",
-          "b"
+          "r1PublicKey",
+          "recoveryPrivateKey",
+          "nodeUrl"
+        ],
+      );
+
+  Future<void> deployContractMethodSmartContractWallet({required SmartContractWallet that, dynamic hint}) {
+    var arg0 = _platform.api2wire_box_autoadd_smart_contract_wallet(that);
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_deploy_contract__method__SmartContractWallet(port_, arg0),
+      parseSuccessData: _wire2api_unit,
+      parseErrorData: null,
+      constMeta: kDeployContractMethodSmartContractWalletConstMeta,
+      argValues: [
+        that
+      ],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kDeployContractMethodSmartContractWalletConstMeta => const FlutterRustBridgeTaskConstMeta(
+        debugName: "deploy_contract__method__SmartContractWallet",
+        argNames: [
+          "that"
+        ],
+      );
+
+  Future<
+      (
+        Uint8List,
+        Uint8List
+      )> genTransferTxRequestMethodSmartContractWallet({required SmartContractWallet that, required String toBech32, required int amount, required String asset, dynamic hint}) {
+    var arg0 = _platform.api2wire_box_autoadd_smart_contract_wallet(that);
+    var arg1 = _platform.api2wire_String(toBech32);
+    var arg2 = _platform.api2wire_u64(amount);
+    var arg3 = _platform.api2wire_String(asset);
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_gen_transfer_tx_request__method__SmartContractWallet(port_, arg0, arg1, arg2, arg3),
+      parseSuccessData: _wire2api___record__uint_8_list_uint_8_list,
+      parseErrorData: null,
+      constMeta: kGenTransferTxRequestMethodSmartContractWalletConstMeta,
+      argValues: [
+        that,
+        toBech32,
+        amount,
+        asset
+      ],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kGenTransferTxRequestMethodSmartContractWalletConstMeta => const FlutterRustBridgeTaskConstMeta(
+        debugName: "gen_transfer_tx_request__method__SmartContractWallet",
+        argNames: [
+          "that",
+          "toBech32",
+          "amount",
+          "asset"
+        ],
+      );
+
+  Future<String> sendTxMethodSmartContractWallet({required SmartContractWallet that, required Uint8List encodedTx, required Uint8List signature, dynamic hint}) {
+    var arg0 = _platform.api2wire_box_autoadd_smart_contract_wallet(that);
+    var arg1 = _platform.api2wire_uint_8_list(encodedTx);
+    var arg2 = _platform.api2wire_uint_8_list(signature);
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_send_tx__method__SmartContractWallet(port_, arg0, arg1, arg2),
+      parseSuccessData: _wire2api_String,
+      parseErrorData: null,
+      constMeta: kSendTxMethodSmartContractWalletConstMeta,
+      argValues: [
+        that,
+        encodedTx,
+        signature
+      ],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kSendTxMethodSmartContractWalletConstMeta => const FlutterRustBridgeTaskConstMeta(
+        debugName: "send_tx__method__SmartContractWallet",
+        argNames: [
+          "that",
+          "encodedTx",
+          "signature"
         ],
       );
 
@@ -57,8 +198,46 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
   }
 // Section: wire2api
 
+  String _wire2api_String(dynamic raw) {
+    return raw as String;
+  }
+
+  (
+    Uint8List,
+    Uint8List
+  ) _wire2api___record__uint_8_list_uint_8_list(dynamic raw) {
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) {
+      throw Exception('Expected 2 elements, got ${arr.length}');
+    }
+    return (
+      _wire2api_uint_8_list(arr[0]),
+      _wire2api_uint_8_list(arr[1]),
+    );
+  }
+
+  SmartContractWallet _wire2api_smart_contract_wallet(dynamic raw) {
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4) throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return SmartContractWallet(
+      bridge: this,
+      bech32Address: _wire2api_String(arr[0]),
+      r1PublicKey: _wire2api_String(arr[1]),
+      recoveryPrivateKey: _wire2api_String(arr[2]),
+      nodeUrl: _wire2api_String(arr[3]),
+    );
+  }
+
   int _wire2api_u8(dynamic raw) {
     return raw as int;
+  }
+
+  Uint8List _wire2api_uint_8_list(dynamic raw) {
+    return raw as Uint8List;
+  }
+
+  void _wire2api_unit(dynamic raw) {
+    return;
   }
 }
 
@@ -68,4 +247,5 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
 int api2wire_u8(int raw) {
   return raw;
 }
+
 // Section: finalizer
