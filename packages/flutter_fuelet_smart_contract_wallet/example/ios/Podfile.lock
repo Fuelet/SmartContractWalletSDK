@@ -1,0 +1,21 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_fuelet_smart_contract_wallet (0.0.1)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_fuelet_smart_contract_wallet (from `.symlinks/plugins/flutter_fuelet_smart_contract_wallet/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_fuelet_smart_contract_wallet:
+    :path: ".symlinks/plugins/flutter_fuelet_smart_contract_wallet/ios"
+
+SPEC CHECKSUMS:
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_fuelet_smart_contract_wallet: 13130c332141f7255bbb5434ea011c7a6c7d1a97
+
+PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
+
+COCOAPODS: 1.14.3
