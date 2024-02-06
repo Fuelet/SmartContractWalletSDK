@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ const _testWalletPrivateKey =
 const _stubR1PublicKey =
     '0xfe1177573a47310756f27ef25c7229b5da8d5109a7258b297f23a6768c78cb40';
 const _notGeneratedTitle = 'not generated yet';
+const _unknownTitle = 'unknown';
 
 void main() {
   runApp(const SmartContractWalletUsageExample());
@@ -47,9 +49,11 @@ List<Widget> _commonButton(String text, VoidCallback? onPressed) {
 
 class _SmartContractWalletUsageExampleState
     extends State<SmartContractWalletUsageExample> {
+  SmartContractWallet? _wallet;
   String _r1PublicKey = _stubR1PublicKey;
   String _recoveryWalletPrivateKey = _testWalletPrivateKey;
   String _predicateAddress = _notGeneratedTitle;
+  String _contractDeploymentState = _unknownTitle;
 
   @override
   void initState() {
@@ -58,7 +62,6 @@ class _SmartContractWalletUsageExampleState
 
   @override
   Widget build(BuildContext context) {
-    const spacerSmall = SizedBox(height: 10);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -74,6 +77,8 @@ class _SmartContractWalletUsageExampleState
                     'recoveryWalletPrivateKey: $_recoveryWalletPrivateKey'),
                 ..._commonText('predicateAddress: $_predicateAddress'),
                 ..._commonButton('Connect', _connectToWallet),
+                ..._commonText('Deployment state: $_contractDeploymentState'),
+                ..._commonButton('Deploy contract', _deployContract),
               ],
             ),
           ),
@@ -88,7 +93,25 @@ class _SmartContractWalletUsageExampleState
         r1PublicKey: _r1PublicKey,
         recoveryWalletPrivateKey: _recoveryWalletPrivateKey);
     setState(() {
+      _wallet = wallet;
       _predicateAddress = wallet.predicateBech32Address;
+    });
+  }
+
+  Future<void> _deployContract() async {
+    if (_wallet == null) {
+      return;
+    }
+    try {
+      await _wallet!.deployContract();
+    } catch (e) {
+      setState(() {
+        _contractDeploymentState = e.toString();
+      });
+      rethrow;
+    }
+    setState(() {
+      _contractDeploymentState = 'Deployed';
     });
   }
 }
