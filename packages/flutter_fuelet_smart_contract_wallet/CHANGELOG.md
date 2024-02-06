@@ -1,3 +1,7 @@
+## 0.0.6
+
+ - Fix build scripts
+
 ## 0.0.5
 
  - **FIX**: podspec. ([1707b67c](https://github.com/Fuelet/SmartContractWalletSDK/commit/1707b67cb6b89609a2f33f14fb01f5fe0fb5b8cc))
