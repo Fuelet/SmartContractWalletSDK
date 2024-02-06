@@ -42,7 +42,7 @@ pub fn get_script_hash(script: &model::WithdrawalScript<WalletUnlocked>) -> [u8;
 }
 
 pub fn get_predicate_from_script_hash(r1_public_key: String, script_hash: [u8; 32]) -> Predicate {
-    let pub_key = Bits256::from_hex_str(r1_public_key.as_str()).unwrap();// PublicKey::from_str(r1_public_key.as_str()).unwrap();
+    let pub_key = Bits256::from_hex_str(r1_public_key.as_str()).unwrap();
     let configurables = model::SecureEnclavePredicateConfigurables::new()
         .with_SECURE_ENCLAVE_PUBLIC_KEY(pub_key)
         .with_EXPECTED_SCRIPT_BYTECODE_HASH(Bits256(script_hash));
