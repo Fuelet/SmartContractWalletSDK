@@ -1,3 +1,7 @@
+## 1.1.0
+
+ - **FEAT**: contracts interaction ([#1](https://github.com/Fuelet/SmartContractWalletSDK/issues/1)). ([00a4592f](https://github.com/Fuelet/SmartContractWalletSDK/commit/00a4592f0da26750d531466bd11af06331b568f3))
+
 ## 1.0.1
 
  - Init
