@@ -64,7 +64,7 @@ class FueletSmartContractWalletWasmModule implements WasmModule {
 
   external dynamic /* void */ wire_deploy_contract__method__SmartContractWallet(NativePortType port_, List<dynamic> that);
 
-  external dynamic /* void */ wire_gen_transfer_tx_request__method__SmartContractWallet(NativePortType port_, List<dynamic> that, String to_bech32, Object amount, String asset);
+  external dynamic /* void */ wire_gen_transfer_tx_request__method__SmartContractWallet(NativePortType port_, List<dynamic> that, String to_b256, Object amount, String asset);
 
   external dynamic /* void */ wire_send_tx__method__SmartContractWallet(NativePortType port_, List<dynamic> that, Uint8List encoded_tx, Uint8List signature);
 }
@@ -78,7 +78,7 @@ class FueletSmartContractWalletWire extends FlutterRustBridgeWasmWireBase<Fuelet
 
   void wire_deploy_contract__method__SmartContractWallet(NativePortType port_, List<dynamic> that) => wasmModule.wire_deploy_contract__method__SmartContractWallet(port_, that);
 
-  void wire_gen_transfer_tx_request__method__SmartContractWallet(NativePortType port_, List<dynamic> that, String to_bech32, Object amount, String asset) => wasmModule.wire_gen_transfer_tx_request__method__SmartContractWallet(port_, that, to_bech32, amount, asset);
+  void wire_gen_transfer_tx_request__method__SmartContractWallet(NativePortType port_, List<dynamic> that, String to_b256, Object amount, String asset) => wasmModule.wire_gen_transfer_tx_request__method__SmartContractWallet(port_, that, to_b256, amount, asset);
 
   void wire_send_tx__method__SmartContractWallet(NativePortType port_, List<dynamic> that, Uint8List encoded_tx, Uint8List signature) => wasmModule.wire_send_tx__method__SmartContractWallet(port_, that, encoded_tx, signature);
 }

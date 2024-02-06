@@ -43,7 +43,7 @@ void wire_deploy_contract__method__SmartContractWallet(int64_t port_,
 
 void wire_gen_transfer_tx_request__method__SmartContractWallet(int64_t port_,
                                                                struct wire_SmartContractWallet *that,
-                                                               struct wire_uint_8_list *to_bech32,
+                                                               struct wire_uint_8_list *to_b256,
                                                                uint64_t amount,
                                                                struct wire_uint_8_list *asset);
 
