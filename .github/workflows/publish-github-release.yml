@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: ./.github/actions/initialize
 
@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: ./.github/actions/initialize
 
@@ -52,16 +52,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ build_apple, build_android ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Download apple binary
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: apple_binary
           path: platform-build
 
       - name: Download android binary
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: android_binary
           path: platform-build
