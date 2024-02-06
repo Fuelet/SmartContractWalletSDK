@@ -21,7 +21,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: apple_binary
-          path: platform-build/FueletSmartContractWallet.xcframework.zip
+          path: platform-build/FlutterFueletSmartContractWallet.xcframework.zip
 
   build_android:
     runs-on: ubuntu-latest
