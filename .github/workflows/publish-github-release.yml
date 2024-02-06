@@ -18,7 +18,7 @@ jobs:
         run: melos run build:apple
 
       - name: Uploading artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: apple_binary
           path: platform-build/FlutterFueletSmartContractWallet.xcframework.zip
@@ -43,7 +43,7 @@ jobs:
         run: melos run build:android
 
       - name: Uploading artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: android_binary
           path: platform-build/android.tar.gz
