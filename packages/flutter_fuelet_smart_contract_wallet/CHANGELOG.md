@@ -1,3 +1,7 @@
+## 0.0.8
+
+ - Bump "flutter_fuelet_smart_contract_wallet" to `0.0.8`.
+
 ## 0.0.7
 
  - Bump "flutter_fuelet_smart_contract_wallet" to `0.0.7`.

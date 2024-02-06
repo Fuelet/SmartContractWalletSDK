@@ -15,6 +15,32 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`fuelet_smart_contract_wallet` - `v1.2.3`](#fuelet_smart_contract_wallet---v123)
+ - [`flutter_fuelet_smart_contract_wallet` - `v0.0.8`](#flutter_fuelet_smart_contract_wallet---v008)
+
+---
+
+#### `fuelet_smart_contract_wallet` - `v1.2.3`
+
+ - Bump "fuelet_smart_contract_wallet" to `1.2.3`.
+
+#### `flutter_fuelet_smart_contract_wallet` - `v0.0.8`
+
+ - Bump "flutter_fuelet_smart_contract_wallet" to `0.0.8`.
+
+
+## 2024-02-06
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`fuelet_smart_contract_wallet` - `v1.2.2`](#fuelet_smart_contract_wallet---v122)
  - [`flutter_fuelet_smart_contract_wallet` - `v0.0.7`](#flutter_fuelet_smart_contract_wallet---v007)
 
