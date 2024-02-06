@@ -1,3 +1,9 @@
+## 0.0.5
+
+ - **FIX**: podspec. ([1707b67c](https://github.com/Fuelet/SmartContractWalletSDK/commit/1707b67cb6b89609a2f33f14fb01f5fe0fb5b8cc))
+ - **FIX**: mobile wallet bindings. ([2fd5b041](https://github.com/Fuelet/SmartContractWalletSDK/commit/2fd5b041bc3fd97b914d27e8f36d5964ee018432))
+ - **FEAT**: basic example. ([a8d886b4](https://github.com/Fuelet/SmartContractWalletSDK/commit/a8d886b40e38f3a4425f9c4b28244b98cd560da5))
+
 ## 0.0.4
 
  - **FEAT**: flutter smart contract wallet implementation. ([cd758597](https://github.com/Fuelet/SmartContractWalletSDK/commit/cd75859773691a3646d8843ffc2dd153c8798f81))

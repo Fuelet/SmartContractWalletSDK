@@ -15,6 +15,29 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`flutter_fuelet_smart_contract_wallet` - `v0.0.5`](#flutter_fuelet_smart_contract_wallet---v005)
+
+---
+
+#### `flutter_fuelet_smart_contract_wallet` - `v0.0.5`
+
+ - **FIX**: podspec. ([1707b67c](https://github.com/Fuelet/SmartContractWalletSDK/commit/1707b67cb6b89609a2f33f14fb01f5fe0fb5b8cc))
+ - **FIX**: mobile wallet bindings. ([2fd5b041](https://github.com/Fuelet/SmartContractWalletSDK/commit/2fd5b041bc3fd97b914d27e8f36d5964ee018432))
+ - **FEAT**: basic example. ([a8d886b4](https://github.com/Fuelet/SmartContractWalletSDK/commit/a8d886b40e38f3a4425f9c4b28244b98cd560da5))
+
+
+## 2024-02-06
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`flutter_fuelet_smart_contract_wallet` - `v0.0.4`](#flutter_fuelet_smart_contract_wallet---v004)
  - [`fuelet_smart_contract_wallet` - `v1.2.0`](#fuelet_smart_contract_wallet---v120)
 

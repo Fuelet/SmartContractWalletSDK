@@ -1,6 +1,6 @@
 name: flutter_fuelet_smart_contract_wallet
 description: Flutter bridge for Fuelet smart contract wallet
-version: 0.0.4
+version: 0.0.5
 homepage: https://github.com/Fuelet/SmartContractWalletSDK
 
 environment:
