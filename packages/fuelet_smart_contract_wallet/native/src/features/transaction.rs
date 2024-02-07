@@ -2,25 +2,26 @@ use std::io;
 use std::str::FromStr;
 
 use fuel_crypto::fuel_types::AssetId;
+use fuel_crypto::fuel_types::canonical::Deserialize;
 use fuel_crypto::fuel_types::canonical::Serialize;
 use fuel_tx::Witness;
-use fuels::prelude::{Account, Bech32Address, BuildableTransaction, Provider, ScriptTransactionBuilder, Transaction, TransactionType};
-use fuels::tx::FuelTransaction;
 use fuels::accounts::predicate::Predicate;
-use crate::error::CustomResult;
-use fuel_crypto::fuel_types::canonical::Deserialize;
+use fuels::prelude::{Account, Address, Bech32Address, BuildableTransaction, Provider, ScriptTransactionBuilder, Transaction, TransactionType};
+use fuels::tx::FuelTransaction;
 
+use crate::error::CustomResult;
 use crate::util;
 
 pub async fn get_transfer_request_from_predicate(predicate: &Predicate,
                                                  provider: &Provider,
-                                                 to_bech32: String,
+                                                 to_b256: String,
                                                  amount: u64,
                                                  asset: String) -> (Vec<u8>, Vec<u8>) {
     let network_info = provider.network_info().await.unwrap();
 
     let asset_id = AssetId::from_str(&asset).unwrap();
-    let recipient = Bech32Address::from_str(to_bech32.as_str()).unwrap();
+    let b256_address = Address::from_str(to_b256.as_str()).unwrap();
+    let recipient = Bech32Address::from(b256_address);
 
     let inputs = predicate.get_asset_inputs_for_amount(asset_id, amount).await.unwrap();
     let outputs = predicate.get_asset_outputs_for_amount(&recipient, asset_id, amount);
@@ -37,7 +38,6 @@ pub async fn get_transfer_request_from_predicate(predicate: &Predicate,
     let tx_id = tx.id(provider.chain_id());
     (encoded_tx, tx_id.to_vec())
 }
-
 
 
 fn decode_transaction(encoded_tx: &Vec<u8>) -> CustomResult<TransactionType> {
@@ -61,7 +61,7 @@ fn add_signature(tx: &mut TransactionType, signature: &[u8]) -> fuels::prelude::
     match tx {
         TransactionType::Script(script) => script.append_witness(witness),
         TransactionType::Create(create) => create.append_witness(witness),
-        TransactionType::Mint(mint) => Err(io::Error::new(
+        TransactionType::Mint(_) => Err(io::Error::new(
             io::ErrorKind::InvalidData,
             "Cannot sign Mint transaction",
         ).into())

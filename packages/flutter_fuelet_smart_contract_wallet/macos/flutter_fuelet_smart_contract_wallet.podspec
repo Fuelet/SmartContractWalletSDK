@@ -1,8 +1,8 @@
-release_tag_name = 'fuelet_smart_contract_wallet-v1.1.0' # generated; do not edit
+release_tag_name = 'fuelet_smart_contract_wallet-v1.2.3' # generated; do not edit
 
 # We cannot distribute the XCFramework alongside the library directly,
 # so we have to fetch the correct version here.
-framework_name = 'FueletSmartContractWallet.xcframework'
+framework_name = 'FlutterFueletSmartContractWallet.xcframework'
 remote_zip_name = "#{framework_name}.zip"
 url = "https://github.com/Fuelet/SmartContractWalletSDK/releases/download/#{release_tag_name}/#{remote_zip_name}"
 local_zip_name = "#{release_tag_name}.zip"
@@ -20,7 +20,7 @@ cd -
 `
 
 Pod::Spec.new do |spec|
-  spec.name          = 'fuelet_smart_contract_wallet'
+  spec.name          = 'flutter_fuelet_smart_contract_wallet'
   spec.version       = '0.0.1'
   spec.license       = { :file => '../LICENSE' }
   spec.homepage      = 'https://github.com/Fuelet/SmartContractWalletSDK'

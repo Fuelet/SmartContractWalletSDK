@@ -48,13 +48,13 @@ impl SmartContractWallet {
 
     #[tokio::main]
     pub async fn gen_transfer_tx_request(&self,
-                                         to_bech32: String,
+                                         to_b256: String,
                                          amount: u64,
                                          asset: String) -> (Vec<u8>, Vec<u8>) {
         let recovery_secret_key = self.get_recovery_secret_key();
         let recovery_wallet = self.get_recovery_wallet().await;
         let predicate = sway::get_predicate(&self.r1_public_key, &recovery_secret_key, &recovery_wallet);
-        transaction::get_transfer_request_from_predicate(&predicate, recovery_wallet.provider().unwrap(), to_bech32, amount, asset).await
+        transaction::get_transfer_request_from_predicate(&predicate, recovery_wallet.provider().unwrap(), to_b256, amount, asset).await
     }
 
 

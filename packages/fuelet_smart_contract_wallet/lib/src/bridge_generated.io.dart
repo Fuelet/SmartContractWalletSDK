@@ -164,14 +164,14 @@ class FueletSmartContractWalletWire implements FlutterRustBridgeWireBase {
   void wire_gen_transfer_tx_request__method__SmartContractWallet(
     int port_,
     ffi.Pointer<wire_SmartContractWallet> that,
-    ffi.Pointer<wire_uint_8_list> to_bech32,
+    ffi.Pointer<wire_uint_8_list> to_b256,
     int amount,
     ffi.Pointer<wire_uint_8_list> asset,
   ) {
     return _wire_gen_transfer_tx_request__method__SmartContractWallet(
       port_,
       that,
-      to_bech32,
+      to_b256,
       amount,
       asset,
     );

@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: ./.github/actions/initialize
 
@@ -18,17 +18,17 @@ jobs:
         run: melos run build:apple
 
       - name: Uploading artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: apple_binary
-          path: platform-build/FueletSmartContractWallet.xcframework.zip
+          path: platform-build/FlutterFueletSmartContractWallet.xcframework.zip
 
   build_android:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: ./.github/actions/initialize
 
@@ -43,7 +43,7 @@ jobs:
         run: melos run build:android
 
       - name: Uploading artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: android_binary
           path: platform-build/android.tar.gz
@@ -52,16 +52,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ build_apple, build_android ]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Download apple binary
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: apple_binary
           path: platform-build
 
       - name: Download android binary
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: android_binary
           path: platform-build

@@ -17,7 +17,7 @@ do
 done
 
 # Create XCFramework zip
-FRAMEWORK="FueletSmartContractWallet.xcframework"
+FRAMEWORK="FlutterFueletSmartContractWallet.xcframework"
 LIBNAME=libfuelet_smart_contract_wallet.a
 mkdir mac-lipo ios-sim-lipo
 IOS_SIM_LIPO=ios-sim-lipo/$LIBNAME

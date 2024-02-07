@@ -28,7 +28,7 @@ abstract class FueletSmartContractWallet {
       (
         Uint8List,
         Uint8List
-      )> genTransferTxRequestMethodSmartContractWallet({required SmartContractWallet that, required String toBech32, required int amount, required String asset, dynamic hint});
+      )> genTransferTxRequestMethodSmartContractWallet({required SmartContractWallet that, required String toB256, required int amount, required String asset, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kGenTransferTxRequestMethodSmartContractWalletConstMeta;
 
@@ -62,10 +62,10 @@ class SmartContractWallet {
       (
         Uint8List,
         Uint8List
-      )> genTransferTxRequest({required String toBech32, required int amount, required String asset, dynamic hint}) => bridge
+      )> genTransferTxRequest({required String toB256, required int amount, required String asset, dynamic hint}) => bridge
           .genTransferTxRequestMethodSmartContractWallet(
         that: this,
-        toBech32: toBech32,
+        toB256: toB256,
         amount: amount,
         asset: asset,
       );
@@ -136,9 +136,9 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
       (
         Uint8List,
         Uint8List
-      )> genTransferTxRequestMethodSmartContractWallet({required SmartContractWallet that, required String toBech32, required int amount, required String asset, dynamic hint}) {
+      )> genTransferTxRequestMethodSmartContractWallet({required SmartContractWallet that, required String toB256, required int amount, required String asset, dynamic hint}) {
     var arg0 = _platform.api2wire_box_autoadd_smart_contract_wallet(that);
-    var arg1 = _platform.api2wire_String(toBech32);
+    var arg1 = _platform.api2wire_String(toB256);
     var arg2 = _platform.api2wire_u64(amount);
     var arg3 = _platform.api2wire_String(asset);
     return _platform.executeNormal(FlutterRustBridgeTask(
@@ -148,7 +148,7 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
       constMeta: kGenTransferTxRequestMethodSmartContractWalletConstMeta,
       argValues: [
         that,
-        toBech32,
+        toB256,
         amount,
         asset
       ],
@@ -160,7 +160,7 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
         debugName: "gen_transfer_tx_request__method__SmartContractWallet",
         argNames: [
           "that",
-          "toBech32",
+          "toB256",
           "amount",
           "asset"
         ],

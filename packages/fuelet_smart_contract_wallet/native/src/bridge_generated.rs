@@ -69,7 +69,7 @@ fn wire_deploy_contract__method__SmartContractWallet_impl(
 fn wire_gen_transfer_tx_request__method__SmartContractWallet_impl(
     port_: MessagePort,
     that: impl Wire2Api<SmartContractWallet> + UnwindSafe,
-    to_bech32: impl Wire2Api<String> + UnwindSafe,
+    to_b256: impl Wire2Api<String> + UnwindSafe,
     amount: impl Wire2Api<u64> + UnwindSafe,
     asset: impl Wire2Api<String> + UnwindSafe,
 ) {
@@ -81,13 +81,13 @@ fn wire_gen_transfer_tx_request__method__SmartContractWallet_impl(
         },
         move || {
             let api_that = that.wire2api();
-            let api_to_bech32 = to_bech32.wire2api();
+            let api_to_b256 = to_b256.wire2api();
             let api_amount = amount.wire2api();
             let api_asset = asset.wire2api();
             move |task_callback| {
                 Result::<_, ()>::Ok(SmartContractWallet::gen_transfer_tx_request(
                     &api_that,
-                    api_to_bech32,
+                    api_to_b256,
                     api_amount,
                     api_asset,
                 ))
@@ -211,12 +211,12 @@ mod web {
     pub fn wire_gen_transfer_tx_request__method__SmartContractWallet(
         port_: MessagePort,
         that: JsValue,
-        to_bech32: String,
+        to_b256: String,
         amount: u64,
         asset: String,
     ) {
         wire_gen_transfer_tx_request__method__SmartContractWallet_impl(
-            port_, that, to_bech32, amount, asset,
+            port_, that, to_b256, amount, asset,
         )
     }
 
@@ -331,12 +331,12 @@ mod io {
     pub extern "C" fn wire_gen_transfer_tx_request__method__SmartContractWallet(
         port_: i64,
         that: *mut wire_SmartContractWallet,
-        to_bech32: *mut wire_uint_8_list,
+        to_b256: *mut wire_uint_8_list,
         amount: u64,
         asset: *mut wire_uint_8_list,
     ) {
         wire_gen_transfer_tx_request__method__SmartContractWallet_impl(
-            port_, that, to_bech32, amount, asset,
+            port_, that, to_b256, amount, asset,
         )
     }
 
