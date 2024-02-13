@@ -1,3 +1,9 @@
+## 1.3.0
+
+ - **FEAT**: recover r1 signatures in the predicate. ([79ed884d](https://github.com/Fuelet/SmartContractWalletSDK/commit/79ed884de6986a89fb2970de820ebb162855e4d6))
+ - **FEAT**: flutter wrapper ([#2](https://github.com/Fuelet/SmartContractWalletSDK/issues/2)). ([5528e283](https://github.com/Fuelet/SmartContractWalletSDK/commit/5528e283524226c2caf308b11f85af0e911c41e0))
+ - **FEAT**: flutter smart contract wallet implementation. ([cd758597](https://github.com/Fuelet/SmartContractWalletSDK/commit/cd75859773691a3646d8843ffc2dd153c8798f81))
+
 ## 1.2.3
 
  - Bump "fuelet_smart_contract_wallet" to `1.2.3`.

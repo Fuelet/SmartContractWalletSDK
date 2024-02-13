@@ -1,4 +1,4 @@
-set(LibraryVersion "fuelet_smart_contract_wallet-v1.2.3") # generated; do not edit
+set(LibraryVersion "fuelet_smart_contract_wallet-v1.3.0") # generated; do not edit
 
 # TODO Remove this workaround once Flutter supports Windows ARM.
 # https://github.com/flutter/flutter/issues/116196
