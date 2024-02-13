@@ -1,6 +1,6 @@
 predicate;
 
-use std::{constants::ZERO_B256, b512::B512, ecr::{ec_recover_address}, tx::{tx_id, tx_witnesses_count, tx_witness_data, tx_script_bytecode_hash}};
+use std::{constants::ZERO_B256, b512::B512, ecr::{ec_recover_address_r1}, tx::{tx_id, tx_witnesses_count, tx_witness_data, tx_script_bytecode_hash}};
 
 configurable {
     SECURE_ENCLAVE_PUBLIC_KEY: b256 = ZERO_B256,
@@ -8,8 +8,7 @@ configurable {
 }
 
 fn witness_matches_signature(signature: B512, message: b256) -> bool {
-    // TODO: switch to r1
-    match ec_recover_address(signature, message) {
+    match ec_recover_address_r1(signature, message) {
         Err(_) => false,
         Ok(address) => address.value == SECURE_ENCLAVE_PUBLIC_KEY,
     }
