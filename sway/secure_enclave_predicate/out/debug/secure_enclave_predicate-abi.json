@@ -2,14 +2,38 @@
   "types": [
     {
       "typeId": 0,
+      "type": "[_; 2]",
+      "components": [
+        {
+          "name": "__array_element",
+          "type": 1,
+          "typeArguments": null
+        }
+      ],
+      "typeParameters": null
+    },
+    {
+      "typeId": 1,
       "type": "b256",
       "components": null,
       "typeParameters": null
     },
     {
-      "typeId": 1,
+      "typeId": 2,
       "type": "bool",
       "components": null,
+      "typeParameters": null
+    },
+    {
+      "typeId": 3,
+      "type": "struct B512",
+      "components": [
+        {
+          "name": "bytes",
+          "type": 0,
+          "typeArguments": null
+        }
+      ],
       "typeParameters": null
     }
   ],
@@ -19,7 +43,7 @@
       "name": "main",
       "output": {
         "name": "",
-        "type": 1,
+        "type": 2,
         "typeArguments": null
       },
       "attributes": null
@@ -32,19 +56,19 @@
       "name": "SECURE_ENCLAVE_PUBLIC_KEY",
       "configurableType": {
         "name": "",
-        "type": 0,
-        "typeArguments": null
+        "type": 3,
+        "typeArguments": []
       },
-      "offset": 2056
+      "offset": 1040
     },
     {
       "name": "EXPECTED_SCRIPT_BYTECODE_HASH",
       "configurableType": {
         "name": "",
-        "type": 0,
+        "type": 1,
         "typeArguments": null
       },
-      "offset": 2096
+      "offset": 1112
     }
   ]
 }
