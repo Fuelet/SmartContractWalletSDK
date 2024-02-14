@@ -15,6 +15,32 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`flutter_fuelet_smart_contract_wallet` - `v0.0.10`](#flutter_fuelet_smart_contract_wallet---v0010)
+ - [`fuelet_smart_contract_wallet` - `v1.4.0`](#fuelet_smart_contract_wallet---v140)
+
+---
+
+#### `flutter_fuelet_smart_contract_wallet` - `v0.0.10`
+
+ - **FEAT**: accept r1 public key as b512. ([efd45373](https://github.com/Fuelet/SmartContractWalletSDK/commit/efd453737a35a28f26daa7c46c37e724810d9640))
+
+#### `fuelet_smart_contract_wallet` - `v1.4.0`
+
+ - **FEAT**: accept r1 public key as b512. ([efd45373](https://github.com/Fuelet/SmartContractWalletSDK/commit/efd453737a35a28f26daa7c46c37e724810d9640))
+
+
+## 2024-02-14
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`fuelet_smart_contract_wallet` - `v1.3.1`](#fuelet_smart_contract_wallet---v131)
  - [`flutter_fuelet_smart_contract_wallet` - `v0.0.9+1`](#flutter_fuelet_smart_contract_wallet---v0091)
 

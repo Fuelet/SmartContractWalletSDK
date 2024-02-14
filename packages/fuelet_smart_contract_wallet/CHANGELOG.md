@@ -1,3 +1,7 @@
+## 1.4.0
+
+ - **FEAT**: accept r1 public key as b512. ([efd45373](https://github.com/Fuelet/SmartContractWalletSDK/commit/efd453737a35a28f26daa7c46c37e724810d9640))
+
 ## 1.3.1
 
  - **FIX**: set provider to predicate. ([c8295d89](https://github.com/Fuelet/SmartContractWalletSDK/commit/c8295d8969923534af6da3a517a6afbf8f4b5415))

@@ -1,3 +1,7 @@
+## 0.0.10
+
+ - **FEAT**: accept r1 public key as b512. ([efd45373](https://github.com/Fuelet/SmartContractWalletSDK/commit/efd453737a35a28f26daa7c46c37e724810d9640))
+
 ## 0.0.9+1
 
  - Update a dependency to the latest release.
