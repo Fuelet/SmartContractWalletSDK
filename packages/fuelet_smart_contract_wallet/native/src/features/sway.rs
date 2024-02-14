@@ -2,7 +2,7 @@ use fuel_crypto::fuel_types::ContractId;
 use fuel_crypto::SecretKey;
 use fuel_tx::Salt;
 use fuels::accounts::predicate::Predicate;
-use fuels::prelude::{Contract, WalletUnlocked};
+use fuels::prelude::{Contract, Provider, WalletUnlocked};
 use fuels::types::Bits256;
 use sha2::{Digest, Sha256};
 
@@ -41,14 +41,15 @@ pub fn get_script_hash(script: &model::WithdrawalScript<WalletUnlocked>) -> [u8;
     b256.0
 }
 
-pub fn get_predicate_from_script_hash(r1_public_key: String, script_hash: [u8; 32]) -> Predicate {
+pub fn get_predicate_from_script_hash(r1_public_key: String, script_hash: [u8; 32], provider: &Provider) -> Predicate {
     let pub_key = Bits256::from_hex_str(r1_public_key.as_str()).unwrap();
     let configurables = model::SecureEnclavePredicateConfigurables::new()
         .with_SECURE_ENCLAVE_PUBLIC_KEY(pub_key)
         .with_EXPECTED_SCRIPT_BYTECODE_HASH(Bits256(script_hash));
     let predicate_code = hex::decode(gen_consts::SECURE_ENCLAVE_PREDICATE_CODE).unwrap();
     let predicate = Predicate::from_code(predicate_code)
-        .with_configurables(configurables);
+        .with_configurables(configurables)
+        .with_provider(provider.clone());
     predicate
 }
 
@@ -56,5 +57,5 @@ pub fn get_predicate(r1_public_key: &String, recovery_secret_key: &SecretKey, re
     let recovery_contract = get_recovery_checker_contract(recovery_secret_key);
     let withdrawal_script = get_script(recovery_wallet, recovery_contract.contract_id());
     let script_hash = get_script_hash(&withdrawal_script);
-    get_predicate_from_script_hash(r1_public_key.clone(), script_hash)
+    get_predicate_from_script_hash(r1_public_key.clone(), script_hash, recovery_wallet.provider().unwrap())
 }
