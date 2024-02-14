@@ -11,7 +11,11 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
-  fuelet_smart_contract_wallet: ^1.3.1
+  fuelet_smart_contract_wallet:
+    git:
+      url: https://github.com/Fuelet/SmartContractWalletSDK
+      ref: GithubDependencies
+      path: packages/fuelet_smart_contract_wallet
   convert: ^3.1.1
 
 dev_dependencies:
