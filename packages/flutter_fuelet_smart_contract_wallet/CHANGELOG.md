@@ -1,3 +1,7 @@
+## 0.0.9+1
+
+ - Update a dependency to the latest release.
+
 ## 0.0.9
 
  - **FIX**: dyn library initialization. ([f5000732](https://github.com/Fuelet/SmartContractWalletSDK/commit/f50007325b1cd7d9844ee2e9348f611ad2d62fed))

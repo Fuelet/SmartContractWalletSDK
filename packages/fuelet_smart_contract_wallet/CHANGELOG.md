@@ -1,3 +1,8 @@
+## 1.3.1
+
+ - **FIX**: set provider to predicate. ([c8295d89](https://github.com/Fuelet/SmartContractWalletSDK/commit/c8295d8969923534af6da3a517a6afbf8f4b5415))
+ - **FIX**: change predicate address in the test. ([dca7b377](https://github.com/Fuelet/SmartContractWalletSDK/commit/dca7b37759b87cd3a2d1c37a449bce9f02c81309))
+
 ## 1.3.0
 
  - **FEAT**: recover r1 signatures in the predicate. ([79ed884d](https://github.com/Fuelet/SmartContractWalletSDK/commit/79ed884de6986a89fb2970de820ebb162855e4d6))
