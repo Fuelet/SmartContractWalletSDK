@@ -1,3 +1,7 @@
+## 0.0.11
+
+ - Bump "flutter_fuelet_smart_contract_wallet" to `0.0.11`.
+
 ## 0.0.10
 
  - **FEAT**: accept r1 public key as b512. ([efd45373](https://github.com/Fuelet/SmartContractWalletSDK/commit/efd453737a35a28f26daa7c46c37e724810d9640))

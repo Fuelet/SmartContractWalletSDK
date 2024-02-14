@@ -1,3 +1,7 @@
+## 1.4.1
+
+ - Bump "fuelet_smart_contract_wallet" to `1.4.1`.
+
 ## 1.4.0
 
  - **FEAT**: accept r1 public key as b512. ([efd45373](https://github.com/Fuelet/SmartContractWalletSDK/commit/efd453737a35a28f26daa7c46c37e724810d9640))
