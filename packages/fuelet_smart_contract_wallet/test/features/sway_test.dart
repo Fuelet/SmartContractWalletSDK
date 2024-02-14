@@ -7,7 +7,7 @@ void main() {
     final smartContractWallet =
         await getSmartContractWallet(stubR1PublicKey, testWalletPrivateKey);
     expect(smartContractWallet.bech32Address,
-        "fuel1nnh77tj74f0sp6e39q7mmkpjwhnsqedmwq2ld2afmn4atf676wmq8wl7qy");
+        "fuel1vs25gkwh8edslnhzkhuz4zfhtphxwry7epxxffu4gyjeyuu3e75s5vqqv2");
   });
 
   test('tx request creation', () async {
@@ -17,7 +17,7 @@ void main() {
         toB256: testDestinationB256, amount: 1, asset: ethAsset);
     expect(txId.isEmpty, false);
     expect(tx.isEmpty, false);
-  });
+  }, skip: 'Should be run manually (need coins)');
 
   test('deploy contract', () async {
     final smartContractWallet =

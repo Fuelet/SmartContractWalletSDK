@@ -16,7 +16,7 @@ pub fn get_recovery_checker_contract(recovery_secret_key: &SecretKey) -> Contrac
         .with_OWNER_PUBLIC_KEY(Bits256(pub_key.hash().into()));
     let storage_slots = forc_utils::convert_storage_slots(gen_consts::RECOVERY_CHECKER_STORAGE_SLOTS.to_vec());
     forc_utils::load_contract_from_code(gen_consts::RECOVERY_CHECKER_CONTRACT_CODE, configurables.into(),
-                            storage_slots, Salt::default()).unwrap()
+                                        storage_slots, Salt::default()).unwrap()
 }
 
 pub async fn deploy_contract(wallet: &WalletUnlocked, contract: Contract) {
@@ -42,7 +42,7 @@ pub fn get_script_hash(script: &model::WithdrawalScript<WalletUnlocked>) -> [u8;
 }
 
 pub fn get_predicate_from_script_hash(r1_public_key: String, script_hash: [u8; 32], provider: &Provider) -> Predicate {
-    let pub_key = Bits256::from_hex_str(r1_public_key.as_str()).unwrap();
+    let pub_key = util::b512_from_hex_str(r1_public_key.as_str()).unwrap();
     let configurables = model::SecureEnclavePredicateConfigurables::new()
         .with_SECURE_ENCLAVE_PUBLIC_KEY(pub_key)
         .with_EXPECTED_SCRIPT_BYTECODE_HASH(Bits256(script_hash));
