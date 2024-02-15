@@ -1,6 +1,6 @@
 predicate;
 
-use std::{constants::ZERO_B256, b512::B512, ecr::{ec_recover_r1}, tx::{tx_id, tx_witnesses_count, tx_witness_data, tx_script_bytecode_hash}};
+use std::{constants::ZERO_B256, b512::B512, ecr::{ec_recover_r1}, tx::{tx_id, tx_witnesses_count, tx_witness_data, tx_script_bytecode_hash}, hash::*};
 
 configurable {
     SECURE_ENCLAVE_PUBLIC_KEY: B512 = B512::new(),
@@ -15,7 +15,7 @@ fn witness_matches_signature(signature: B512, message: b256) -> bool {
 }
 
 fn contains_required_signature() -> bool {
-    let message: b256 = tx_id();
+    let message: b256 = sha256(tx_id());
 
     let witnesses_count = tx_witnesses_count();
     let mut witness_index = 0;

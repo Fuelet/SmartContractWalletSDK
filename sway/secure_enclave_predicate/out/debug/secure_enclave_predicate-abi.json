@@ -59,7 +59,7 @@
         "type": 3,
         "typeArguments": []
       },
-      "offset": 1040
+      "offset": 1468
     },
     {
       "name": "EXPECTED_SCRIPT_BYTECODE_HASH",
@@ -68,7 +68,7 @@
         "type": 1,
         "typeArguments": null
       },
-      "offset": 1112
+      "offset": 1540
     }
   ]
 }
