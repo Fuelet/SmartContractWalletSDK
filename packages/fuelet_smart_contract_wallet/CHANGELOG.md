@@ -1,3 +1,7 @@
+## 1.5.0
+
+ - **FEAT**: hash the tx id in sway. ([536b299a](https://github.com/Fuelet/SmartContractWalletSDK/commit/536b299ac37db3966896141819a404d32a2f8c7a))
+
 ## 1.4.1
 
  - Bump "fuelet_smart_contract_wallet" to `1.4.1`.

@@ -1,3 +1,7 @@
+## 0.0.11+1
+
+ - Update a dependency to the latest release.
+
 ## 0.0.11
 
  - Bump "flutter_fuelet_smart_contract_wallet" to `0.0.11`.

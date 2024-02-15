@@ -1,6 +1,6 @@
 name: fuelet_smart_contract_wallet
 description: Dart bridge for Fuelet smart contract wallet
-version: 1.4.1
+version: 1.5.0
 repository: https://github.com/Fuelet/SmartContractWalletSDK
 
 environment:

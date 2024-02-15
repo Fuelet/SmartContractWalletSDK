@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-02-15
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`fuelet_smart_contract_wallet` - `v1.5.0`](#fuelet_smart_contract_wallet---v150)
+ - [`flutter_fuelet_smart_contract_wallet` - `v0.0.11+1`](#flutter_fuelet_smart_contract_wallet---v00111)
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+ - `flutter_fuelet_smart_contract_wallet` - `v0.0.11+1`
+
+---
+
+#### `fuelet_smart_contract_wallet` - `v1.5.0`
+
+ - **FEAT**: hash the tx id in sway. ([536b299a](https://github.com/Fuelet/SmartContractWalletSDK/commit/536b299ac37db3966896141819a404d32a2f8c7a))
+
+
 ## 2024-02-14
 
 ### Changes
