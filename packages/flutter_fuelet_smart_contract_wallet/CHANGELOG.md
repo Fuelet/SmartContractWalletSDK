@@ -1,3 +1,7 @@
+## 0.0.12
+
+ - **FEAT**: propagate contract id. ([54ade1b2](https://github.com/Fuelet/SmartContractWalletSDK/commit/54ade1b230558508f9c978589d94f2fa3c82a44d))
+
 ## 0.0.11+1
 
  - Update a dependency to the latest release.

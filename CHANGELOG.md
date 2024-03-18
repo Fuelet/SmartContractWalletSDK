@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-03-18
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`flutter_fuelet_smart_contract_wallet` - `v0.0.12`](#flutter_fuelet_smart_contract_wallet---v0012)
+ - [`fuelet_smart_contract_wallet` - `v1.6.0`](#fuelet_smart_contract_wallet---v160)
+
+---
+
+#### `flutter_fuelet_smart_contract_wallet` - `v0.0.12`
+
+ - **FEAT**: propagate contract id. ([54ade1b2](https://github.com/Fuelet/SmartContractWalletSDK/commit/54ade1b230558508f9c978589d94f2fa3c82a44d))
+
+#### `fuelet_smart_contract_wallet` - `v1.6.0`
+
+ - **FEAT**: propagate contract id. ([54ade1b2](https://github.com/Fuelet/SmartContractWalletSDK/commit/54ade1b230558508f9c978589d94f2fa3c82a44d))
+
+
 ## 2024-02-15
 
 ### Changes

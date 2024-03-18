@@ -1,3 +1,7 @@
+## 1.6.0
+
+ - **FEAT**: propagate contract id. ([54ade1b2](https://github.com/Fuelet/SmartContractWalletSDK/commit/54ade1b230558508f9c978589d94f2fa3c82a44d))
+
 ## 1.5.0
 
  - **FEAT**: hash the tx id in sway. ([536b299a](https://github.com/Fuelet/SmartContractWalletSDK/commit/536b299ac37db3966896141819a404d32a2f8c7a))

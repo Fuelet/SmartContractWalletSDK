@@ -1,4 +1,4 @@
-set(LibraryVersion "fuelet_smart_contract_wallet-v1.5.0") # generated; do not edit
+set(LibraryVersion "fuelet_smart_contract_wallet-v1.6.0") # generated; do not edit
 
 # The Flutter tooling requires that developers have CMake 3.10 or later
 # installed. You should not increase this version, as doing so will cause
