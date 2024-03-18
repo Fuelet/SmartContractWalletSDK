@@ -50,6 +50,7 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
   void _api_fill_to_wire_smart_contract_wallet(SmartContractWallet apiObj, wire_SmartContractWallet wireObj) {
     wireObj.bech32_address = api2wire_String(apiObj.bech32Address);
     wireObj.r1_public_key = api2wire_String(apiObj.r1PublicKey);
+    wireObj.contract_id = api2wire_String(apiObj.contractId);
     wireObj.recovery_private_key = api2wire_String(apiObj.recoveryPrivateKey);
     wireObj.node_url = api2wire_String(apiObj.nodeUrl);
   }
@@ -240,6 +241,8 @@ final class wire_SmartContractWallet extends ffi.Struct {
   external ffi.Pointer<wire_uint_8_list> bech32_address;
 
   external ffi.Pointer<wire_uint_8_list> r1_public_key;
+
+  external ffi.Pointer<wire_uint_8_list> contract_id;
 
   external ffi.Pointer<wire_uint_8_list> recovery_private_key;
 

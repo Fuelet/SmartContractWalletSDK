@@ -24,7 +24,8 @@ class PlatformSmartContractWalletImpl extends BaseWallet {
     return MobileSmartContractWallet(
         rustSmartContractWallet: rustSmartContractWallet,
         predicateBech32Address: rustSmartContractWallet.bech32Address,
-        r1PublicKey: rustSmartContractWallet.r1PublicKey);
+        r1PublicKey: rustSmartContractWallet.r1PublicKey,
+        contractId: rustSmartContractWallet.contractId);
   }
 }
 
@@ -34,11 +35,14 @@ class MobileSmartContractWallet extends WrappedSmartContractWallet {
   final String predicateBech32Address;
   @override
   final String r1PublicKey;
+  @override
+  final String contractId;
 
   MobileSmartContractWallet(
       {required fuelet.SmartContractWallet rustSmartContractWallet,
       required this.predicateBech32Address,
-      required this.r1PublicKey})
+      required this.r1PublicKey,
+      required this.contractId})
       : _rustSmartContractWallet = rustSmartContractWallet;
 
   @override

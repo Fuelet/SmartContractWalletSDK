@@ -17,6 +17,7 @@ typedef struct wire_uint_8_list {
 typedef struct wire_SmartContractWallet {
   struct wire_uint_8_list *bech32_address;
   struct wire_uint_8_list *r1_public_key;
+  struct wire_uint_8_list *contract_id;
   struct wire_uint_8_list *recovery_private_key;
   struct wire_uint_8_list *node_url;
 } wire_SmartContractWallet;

@@ -53,8 +53,7 @@ pub fn get_predicate_from_script_hash(r1_public_key: String, script_hash: [u8; 3
     predicate
 }
 
-pub fn get_predicate(r1_public_key: &String, recovery_secret_key: &SecretKey, recovery_wallet: &WalletUnlocked) -> Predicate {
-    let recovery_contract = get_recovery_checker_contract(recovery_secret_key);
+pub fn get_predicate(recovery_contract: &Contract, r1_public_key: &String, recovery_wallet: &WalletUnlocked) -> Predicate {
     let withdrawal_script = get_script(recovery_wallet, recovery_contract.contract_id());
     let script_hash = get_script_hash(&withdrawal_script);
     get_predicate_from_script_hash(r1_public_key.clone(), script_hash, recovery_wallet.provider().unwrap())

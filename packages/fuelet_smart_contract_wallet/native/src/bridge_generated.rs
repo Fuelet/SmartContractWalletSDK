@@ -162,6 +162,7 @@ impl support::IntoDart for SmartContractWallet {
         vec![
             self.bech32_address.into_into_dart().into_dart(),
             self.r1_public_key.into_into_dart().into_dart(),
+            self.contract_id.into_into_dart().into_dart(),
             self.recovery_private_key.into_into_dart().into_dart(),
             self.node_url.into_into_dart().into_dart(),
         ]
@@ -247,15 +248,16 @@ mod web {
             let self_ = self.dyn_into::<JsArray>().unwrap();
             assert_eq!(
                 self_.length(),
-                4,
-                "Expected 4 elements, got {}",
+                5,
+                "Expected 5 elements, got {}",
                 self_.length()
             );
             SmartContractWallet {
                 bech32_address: self_.get(0).wire2api(),
                 r1_public_key: self_.get(1).wire2api(),
-                recovery_private_key: self_.get(2).wire2api(),
-                node_url: self_.get(3).wire2api(),
+                contract_id: self_.get(2).wire2api(),
+                recovery_private_key: self_.get(3).wire2api(),
+                node_url: self_.get(4).wire2api(),
             }
         }
     }
@@ -387,6 +389,7 @@ mod io {
             SmartContractWallet {
                 bech32_address: self.bech32_address.wire2api(),
                 r1_public_key: self.r1_public_key.wire2api(),
+                contract_id: self.contract_id.wire2api(),
                 recovery_private_key: self.recovery_private_key.wire2api(),
                 node_url: self.node_url.wire2api(),
             }
@@ -408,6 +411,7 @@ mod io {
     pub struct wire_SmartContractWallet {
         bech32_address: *mut wire_uint_8_list,
         r1_public_key: *mut wire_uint_8_list,
+        contract_id: *mut wire_uint_8_list,
         recovery_private_key: *mut wire_uint_8_list,
         node_url: *mut wire_uint_8_list,
     }
@@ -436,6 +440,7 @@ mod io {
             Self {
                 bech32_address: core::ptr::null_mut(),
                 r1_public_key: core::ptr::null_mut(),
+                contract_id: core::ptr::null_mut(),
                 recovery_private_key: core::ptr::null_mut(),
                 node_url: core::ptr::null_mut(),
             }

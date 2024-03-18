@@ -8,6 +8,7 @@ use crate::features::{sway, transaction};
 pub struct SmartContractWallet {
     pub bech32_address: String,
     pub r1_public_key: String,
+    pub contract_id: String,
     pub(crate) recovery_private_key: String,
     pub(crate) node_url: String,
 }
@@ -19,9 +20,10 @@ impl SmartContractWallet {
         let provider = Provider::connect(node_url.clone()).await.unwrap();
         let wallet = WalletUnlocked::new_from_private_key(secret_key, Some(provider));
 
-        let predicate = sway::get_predicate(&r1_public_key, &secret_key, &wallet);
+        let recovery_contract = sway::get_recovery_checker_contract(&secret_key);
+        let predicate = sway::get_predicate(&recovery_contract, &r1_public_key, &wallet);
         let address = predicate.address().to_string();
-        SmartContractWallet { bech32_address: address, r1_public_key, recovery_private_key, node_url }
+        SmartContractWallet { bech32_address: address, r1_public_key, contract_id: recovery_contract.contract_id().to_string(), recovery_private_key, node_url }
     }
 
     async fn get_provider(&self) -> Provider {
@@ -53,7 +55,8 @@ impl SmartContractWallet {
                                          asset: String) -> (Vec<u8>, Vec<u8>) {
         let recovery_secret_key = self.get_recovery_secret_key();
         let recovery_wallet = self.get_recovery_wallet().await;
-        let predicate = sway::get_predicate(&self.r1_public_key, &recovery_secret_key, &recovery_wallet);
+        let recovery_contract = sway::get_recovery_checker_contract(&recovery_secret_key);
+        let predicate = sway::get_predicate(&recovery_contract, &self.r1_public_key, &recovery_wallet);
         transaction::get_transfer_request_from_predicate(&predicate, recovery_wallet.provider().unwrap(), to_b256, amount, asset).await
     }
 

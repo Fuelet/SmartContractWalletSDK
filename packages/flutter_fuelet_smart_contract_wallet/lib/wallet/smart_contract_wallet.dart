@@ -26,6 +26,8 @@ class SmartContractWallet {
 
   String get r1PublicKey => _wrappedWallet.r1PublicKey;
 
+  String get contractId => _wrappedWallet.contractId;
+
   Future<void> deployContract() {
     return _wrappedWallet.deployContract();
   }

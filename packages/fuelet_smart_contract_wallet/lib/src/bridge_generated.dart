@@ -41,6 +41,7 @@ class SmartContractWallet {
   final FueletSmartContractWallet bridge;
   final String bech32Address;
   final String r1PublicKey;
+  final String contractId;
   final String recoveryPrivateKey;
   final String nodeUrl;
 
@@ -48,6 +49,7 @@ class SmartContractWallet {
     required this.bridge,
     required this.bech32Address,
     required this.r1PublicKey,
+    required this.contractId,
     required this.recoveryPrivateKey,
     required this.nodeUrl,
   });
@@ -218,13 +220,14 @@ class FueletSmartContractWalletImpl implements FueletSmartContractWallet {
 
   SmartContractWallet _wire2api_smart_contract_wallet(dynamic raw) {
     final arr = raw as List<dynamic>;
-    if (arr.length != 4) throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    if (arr.length != 5) throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
     return SmartContractWallet(
       bridge: this,
       bech32Address: _wire2api_String(arr[0]),
       r1PublicKey: _wire2api_String(arr[1]),
-      recoveryPrivateKey: _wire2api_String(arr[2]),
-      nodeUrl: _wire2api_String(arr[3]),
+      contractId: _wire2api_String(arr[2]),
+      recoveryPrivateKey: _wire2api_String(arr[3]),
+      nodeUrl: _wire2api_String(arr[4]),
     );
   }
 

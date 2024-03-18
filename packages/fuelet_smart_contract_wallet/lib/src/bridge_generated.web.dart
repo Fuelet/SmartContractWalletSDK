@@ -33,6 +33,7 @@ class FueletSmartContractWalletPlatform extends FlutterRustBridgeBase<FueletSmar
     return [
       api2wire_String(raw.bech32Address),
       api2wire_String(raw.r1PublicKey),
+      api2wire_String(raw.contractId),
       api2wire_String(raw.recoveryPrivateKey),
       api2wire_String(raw.nodeUrl)
     ];

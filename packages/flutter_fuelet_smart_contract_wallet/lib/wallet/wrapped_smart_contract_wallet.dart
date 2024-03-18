@@ -3,6 +3,8 @@ abstract class WrappedSmartContractWallet {
 
   String get r1PublicKey;
 
+  String get contractId;
+
   Future<void> deployContract();
 
   Future<(String, String)> createTransferTxRequest({
