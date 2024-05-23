@@ -1,3 +1,7 @@
+## 1.7.0
+
+ - **FEAT**: upgrade rust wrapper to testnet. ([c583ff2a](https://github.com/Fuelet/SmartContractWalletSDK/commit/c583ff2af6c602c2b9102512d6d500603be1f65a))
+
 ## 1.6.0
 
  - **FEAT**: propagate contract id. ([54ade1b2](https://github.com/Fuelet/SmartContractWalletSDK/commit/54ade1b230558508f9c978589d94f2fa3c82a44d))
