@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_fuelet_smart_contract_wallet/wallet/smart_contract_wallet.dart';
 
-const _betaApiUrl = 'https://beta-5.fuel.network';
+const _testnetApiUrl = 'https://testnet.fuel.network';
 const _testWalletPrivateKey =
     'e5e05a4ab2919dc01b97c90a48853fd4dfbd204e92e44327375702ab09bb184e';
 const _stubR1PublicKey =
@@ -89,7 +89,7 @@ class _SmartContractWalletUsageExampleState
 
   Future<void> _connectToWallet() async {
     final wallet = await SmartContractWallet.connect(
-        networkUrl: _betaApiUrl,
+        networkUrl: _testnetApiUrl,
         r1PublicKey: _r1PublicKey,
         recoveryWalletPrivateKey: _recoveryWalletPrivateKey);
     setState(() {

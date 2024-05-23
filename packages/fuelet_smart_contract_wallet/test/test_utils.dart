@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'package:fuelet_smart_contract_wallet/src/bridge_generated.dart';
 
-const betaApiUrl = 'https://beta-5.fuel.network';
+const testnetApiUrl = 'https://testnet.fuel.network';
 const testDestinationB256 =
     '0xfe1177573a47310756f27ef25c7229b5da8d5109a7258b297f23a6768c78cb40';
 const testWalletPrivateKey =
@@ -11,7 +11,7 @@ const testWalletPrivateKey =
 const stubR1PublicKey =
     '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000';
 const ethAsset =
-    '0x0000000000000000000000000000000000000000000000000000000000000000';
+    '0xf8f8b6283d7fa5b672b530cbb84fcccb4ff8dc40f8176ef4544ddb1f1952ad07';
 
 String projectPath = Directory.current.parent.parent.path;
 var rustSdk = FueletSmartContractWalletImpl(loadLibForFlutter(
@@ -23,5 +23,5 @@ Future<SmartContractWallet> getSmartContractWallet(
       bridge: rustSdk,
       r1PublicKey: r1PublicKey,
       recoveryPrivateKey: recoveryPrivateKey,
-      nodeUrl: betaApiUrl);
+      nodeUrl: testnetApiUrl);
 }

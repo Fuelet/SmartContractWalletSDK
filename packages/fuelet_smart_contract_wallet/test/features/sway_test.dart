@@ -7,7 +7,7 @@ void main() {
     final smartContractWallet =
         await getSmartContractWallet(stubR1PublicKey, testWalletPrivateKey);
     expect(smartContractWallet.bech32Address,
-        "fuel1ec0d4dgpp8clz3pvpglas8q9sh5z9aflrgcjx3pd6xldvae2nvcsm99p8t");
+        "fuel1fcm8mv5d7rauqepp62ew37fupujnjpg5la0qm35e0nyskvhwtr3qkc6g9d");
   });
 
   test('tx request creation', () async {
