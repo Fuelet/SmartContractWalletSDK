@@ -26,3 +26,7 @@ runs:
       uses: dtolnay/rust-toolchain@stable
       with:
         toolchain: 1.77.0
+
+    - name: Install rustfmt
+      shell: bash
+      run: rustup component add rustfmt
