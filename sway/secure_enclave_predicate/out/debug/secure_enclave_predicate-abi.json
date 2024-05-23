@@ -1,4 +1,5 @@
 {
+  "encoding": "1",
   "types": [
     {
       "typeId": 0,
@@ -29,7 +30,7 @@
       "type": "struct B512",
       "components": [
         {
-          "name": "bytes",
+          "name": "bits",
           "type": 0,
           "typeArguments": null
         }
@@ -59,7 +60,7 @@
         "type": 3,
         "typeArguments": []
       },
-      "offset": 1468
+      "offset": 4328
     },
     {
       "name": "EXPECTED_SCRIPT_BYTECODE_HASH",
@@ -68,7 +69,7 @@
         "type": 1,
         "typeArguments": null
       },
-      "offset": 1540
+      "offset": 4400
     }
   ]
 }

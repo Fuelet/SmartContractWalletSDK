@@ -21,21 +21,19 @@ storage {
 
 fn only_owner() {
     require(
-        Identity::Address(Address { value: OWNER_PUBLIC_KEY }) == msg_sender().unwrap(),
+        Identity::Address(Address::from(OWNER_PUBLIC_KEY)) == msg_sender().unwrap(),
         AccessError::NotOwner,
     );
 }
 
-#[storage(read)]
 fn witness_matches_owner_signature(signature: B512, message: b256) -> bool {
     match ec_recover_address(signature, message) {
         Err(_) => false,
-        Ok(address) => OWNER_PUBLIC_KEY == address.value,
+        Ok(address) => OWNER_PUBLIC_KEY == address.into(),
     }
 }
 
 // TODO: do not iterate over all witnesses. Provide an index instead
-#[storage(read)]
 fn contains_owner_signature() -> bool {
     let message: b256 = tx_id();
 
@@ -51,7 +49,6 @@ fn contains_owner_signature() -> bool {
     false
 }
 
-#[storage(read)]
 fn check_owner_signature() {
     require(
         contains_owner_signature(),

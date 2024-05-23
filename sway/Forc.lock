@@ -1,6 +1,6 @@
 [[package]]
 name = "core"
-source = "path+from-root-C9A85C38FB08D9AC"
+source = "path+from-root-E19CE48B3E858B72"
 
 [[package]]
 name = "recovery_checker"
@@ -22,7 +22,7 @@ dependencies = ["std"]
 
 [[package]]
 name = "std"
-source = "git+https://github.com/fuellabs/sway?tag=v0.49.0#a17fbf3e7d8dc9845458260c343b4d8f006f3633"
+source = "git+https://github.com/fuellabs/sway?tag=v0.60.0#2f0392ee35a1e4dd80bd8034962d5b4083dfb8b6"
 dependencies = ["core"]
 
 [[package]]

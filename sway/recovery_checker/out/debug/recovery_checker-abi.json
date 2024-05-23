@@ -1,4 +1,5 @@
 {
+  "encoding": "1",
   "types": [
     {
       "typeId": 0,
@@ -92,7 +93,7 @@
   ],
   "loggedTypes": [
     {
-      "logId": 0,
+      "logId": "16149444947397581828",
       "loggedType": {
         "name": "",
         "type": 2,
@@ -100,26 +101,10 @@
       }
     },
     {
-      "logId": 1,
+      "logId": "14797136899920227014",
       "loggedType": {
         "name": "",
         "type": 3,
-        "typeArguments": []
-      }
-    },
-    {
-      "logId": 2,
-      "loggedType": {
-        "name": "",
-        "type": 2,
-        "typeArguments": []
-      }
-    },
-    {
-      "logId": 3,
-      "loggedType": {
-        "name": "",
-        "type": 2,
         "typeArguments": []
       }
     }
@@ -133,7 +118,7 @@
         "type": 1,
         "typeArguments": null
       },
-      "offset": 6208
+      "offset": 15616
     }
   ]
 }

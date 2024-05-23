@@ -1,4 +1,5 @@
 {
+  "encoding": "1",
   "types": [
     {
       "typeId": 0,
@@ -17,7 +18,7 @@
       "type": "struct ContractId",
       "components": [
         {
-          "name": "value",
+          "name": "bits",
           "type": 1,
           "typeArguments": null
         }
@@ -47,7 +48,7 @@
         "type": 2,
         "typeArguments": []
       },
-      "offset": 124
+      "offset": 2120
     }
   ]
 }
