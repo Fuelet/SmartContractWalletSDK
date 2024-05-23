@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-use fuels::accounts::fuel_crypto::SecretKey;
+use fuel_crypto::SecretKey;
 use fuels::prelude::{Provider, WalletUnlocked};
 
 use crate::features::{sway, transaction};

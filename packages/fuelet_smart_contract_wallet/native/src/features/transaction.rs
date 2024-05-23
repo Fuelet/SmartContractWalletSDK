@@ -17,15 +17,13 @@ pub async fn get_transfer_request_from_predicate(predicate: &Predicate,
                                                  to_b256: String,
                                                  amount: u64,
                                                  asset: String) -> (Vec<u8>, Vec<u8>) {
-    let network_info = provider.network_info().await.unwrap();
-
     let asset_id = AssetId::from_str(&asset).unwrap();
     let b256_address = Address::from_str(to_b256.as_str()).unwrap();
     let recipient = Bech32Address::from(b256_address);
 
     let inputs = predicate.get_asset_inputs_for_amount(asset_id, amount).await.unwrap();
     let outputs = predicate.get_asset_outputs_for_amount(&recipient, asset_id, amount);
-    let mut tx_builder = ScriptTransactionBuilder::prepare_transfer(inputs, outputs, util::default_tx_policies(), network_info);
+    let mut tx_builder = ScriptTransactionBuilder::prepare_transfer(inputs, outputs, util::default_tx_policies());
 
     predicate
         .adjust_for_fee(&mut tx_builder, amount)
@@ -52,7 +50,15 @@ fn wrap_fuel_transaction(value: FuelTransaction) -> CustomResult<TransactionType
         FuelTransaction::Mint(_) => Err(io::Error::new(
             io::ErrorKind::InvalidData,
             "Cannot convert Mint transaction",
-        ).into())
+        ).into()),
+        FuelTransaction::Upgrade(_) => Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "Cannot convert Upgrade transaction",
+        ).into()),
+        FuelTransaction::Upload(_) => Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "Cannot convert Upload transaction",
+        ).into()),
     }
 }
 
@@ -64,7 +70,15 @@ fn add_signature(tx: &mut TransactionType, signature: &[u8]) -> fuels::prelude::
         TransactionType::Mint(_) => Err(io::Error::new(
             io::ErrorKind::InvalidData,
             "Cannot sign Mint transaction",
-        ).into())
+        ).into()),
+        TransactionType::Upload(_) => Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "Cannot sign Upload transaction",
+        ).into()),
+        TransactionType::Upgrade(_) => Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "Cannot sign Upgrade transaction",
+        ).into()),
     }
 }
 
@@ -74,7 +88,9 @@ pub async fn send_tx_using_predicate(provider: &Provider, encoded_tx: Vec<u8>, s
     let tx_id = match tx {
         TransactionType::Script(script) => provider.send_transaction(script).await.unwrap(),
         TransactionType::Create(create) => provider.send_transaction(create).await.unwrap(),
-        TransactionType::Mint(_) => panic!()
+        TransactionType::Mint(_) => panic!(),
+        TransactionType::Upload(_) => panic!(),
+        TransactionType::Upgrade(_) => panic!(),
     };
     tx_id.to_string()
 }
