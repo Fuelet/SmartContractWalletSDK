@@ -1,3 +1,7 @@
+## 1.8.0
+
+ - Bump "fuelet_smart_contract_wallet" to `1.8.0`.
+
 ## 1.7.0
 
  - **FEAT**: upgrade rust wrapper to testnet. ([c583ff2a](https://github.com/Fuelet/SmartContractWalletSDK/commit/c583ff2af6c602c2b9102512d6d500603be1f65a))
