@@ -1,3 +1,8 @@
+## 1.9.0
+
+ - **FIX**: update networks and asset ids. ([546df5f6](https://github.com/Fuelet/SmartContractWalletSDK/commit/546df5f61e527aecf70c7ce5a6a3830afa43e38d))
+ - **FEAT**: upgrade underlying sdk. ([68155db4](https://github.com/Fuelet/SmartContractWalletSDK/commit/68155db4ca9cb4a9319b5aa6b303a843ea209ca8))
+
 ## 1.8.0
 
  - Bump "fuelet_smart_contract_wallet" to `1.8.0`.

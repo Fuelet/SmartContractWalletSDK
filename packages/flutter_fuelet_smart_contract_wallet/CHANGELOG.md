@@ -1,3 +1,7 @@
+## 0.0.13+1
+
+ - **FIX**: update networks and asset ids. ([546df5f6](https://github.com/Fuelet/SmartContractWalletSDK/commit/546df5f61e527aecf70c7ce5a6a3830afa43e38d))
+
 ## 0.0.13
 
  - Bump "flutter_fuelet_smart_contract_wallet" to `0.0.13`.

@@ -1,4 +1,4 @@
-set(LibraryVersion "fuelet_smart_contract_wallet-v1.8.0") # generated; do not edit
+set(LibraryVersion "fuelet_smart_contract_wallet-v1.9.0") # generated; do not edit
 set(PROJECT_NAME "fuelet_smart_contract_wallet")
 
 # Unlike the Windows & Linux CMakeLists.txt, this Android equivalent is just here
