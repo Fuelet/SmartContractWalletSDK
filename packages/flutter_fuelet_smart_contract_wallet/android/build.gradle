@@ -1,40 +1,41 @@
-// The Android Gradle Plugin builds the native code with the Android NDK.
-
-group 'app.fuelet.flutter_fuelet_smart_contract_wallet'
-version '1.0'
-
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        // The Android Gradle Plugin knows how to build native code with the NDK.
-        classpath 'com.android.tools.build:gradle:7.3.0'
-    }
+plugins {
+    id "com.android.library"
 }
 
-rootProject.allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-apply plugin: 'com.android.library'
+group = "app.fuelet.flutter_fuelet_smart_contract_wallet"
+version = "1.0"
 
 android {
-    compileSdkVersion 31
+    namespace = "app.fuelet.flutter_fuelet_smart_contract_wallet"
+
+    compileSdk = 35
+    ndkVersion = "28.0.12433566"
 
     defaultConfig {
-        minSdkVersion 16
+        minSdk = 23
+        targetSdk = 35
     }
 
-    // Trigger the binary download/update over in CMakeLists.txt
     externalNativeBuild {
         cmake {
-            path "CMakeLists.txt"
+            path file("CMakeLists.txt")
+            version "3.22.1"
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    packaging {
+        resources {
+            excludes += ["/META-INF/{AL2.0,LGPL2.1}", "META-INF/LICENSE*", "META-INF/NOTICE*"]
+        }
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
 }

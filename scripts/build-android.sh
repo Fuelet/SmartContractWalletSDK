@@ -19,6 +19,10 @@ rustup target add \
         x86_64-linux-android \
         i686-linux-android
 
+# Google Play (Nov 2024) requires 16 KiB aligned LOAD segments.
+# Pass the linker flags through RUSTFLAGS so every target inherits them.
+export RUSTFLAGS="${RUSTFLAGS:-} -C link-arg=-Wl,-z,max-page-size=0x4000 -C link-arg=-Wl,-z,common-page-size=0x4000"
+
 # Build the android libraries in the jniLibs directory
 cargo ndk -o $JNI_DIR \
         --manifest-path ../Cargo.toml \
